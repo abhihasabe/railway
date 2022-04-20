@@ -12,6 +12,7 @@ class AuthRepository {
   }
 
   Future userRegistrationUser(RegReqModel employeeModel) {
+    print("employeeModel $employeeModel");
     var regJson = {
       "name": "${employeeModel.name}" != "null" ? "${employeeModel.name}" : "",
       "email":
@@ -23,8 +24,11 @@ class AuthRepository {
           : "",
       "dept_id":
           "${employeeModel.deptId}" != "null" ? "${employeeModel.deptId}" : "",
-      "user_type": "${employeeModel.user_type}" != "null"
-          ? "${employeeModel.user_type}"
+      "user_type": "${employeeModel.userType}" != "null"
+          ? "${employeeModel.userType}"
+          : "",
+      "activation": "${employeeModel.activation}" != "null"
+          ? "${employeeModel.activation}"
           : ""
     };
     resp = APIManager.authAPICall(REG_URL, regJson);

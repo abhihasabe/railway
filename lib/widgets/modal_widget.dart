@@ -15,7 +15,6 @@ class ModalWidget {
           barrierDismissible: true,
           builder: (context) =>
               AlertDialog(
-                alignment: Alignment.centerRight,
                 title: icon == null
                     ? title == null
                         ? null

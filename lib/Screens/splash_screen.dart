@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:railway_alert/widgets/logo_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,12 +14,17 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       color: Colors.white,
       key: const Key("container"),
-      child: const Center(
-        child: Text(
-          "Splash",
-          style: TextStyle(fontSize: 18),
-        ),
+      child: Center(
+        child: _buildLogo(),
       ),
     );
   }
+}
+
+_buildLogo() {
+  return const LogoWidget(
+    header: false,
+    challenge: false,
+    small: true,
+  );
 }

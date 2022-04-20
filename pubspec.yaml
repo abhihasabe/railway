@@ -32,6 +32,8 @@ dependencies:
 
   flutter_secure_storage: ^5.0.2
   multi_select_flutter: ^4.1.2
+  background_location: ^0.8.1
+  assets_audio_player: ^3.0.4
   responsive_table: ^0.2.0+2
   flutter_speed_dial: ^5.1.0
   connectivity_plus: ^2.2.1
@@ -41,10 +43,12 @@ dependencies:
     sdk: flutter
   hive_flutter: ^1.1.0
   flutter_bloc: ^8.0.1
+  flutter_sms: ^2.3.2
   flutter_svg: ^1.0.3
   data_tables: ^1.4.0
   velocity_x: ^3.4.0
   vrouter: ^1.2.0+21
+  telephony: ^0.1.4
   equatable: ^2.0.3
   provider: ^6.0.2
   oktoast: ^3.1.5
@@ -53,6 +57,11 @@ dependencies:
   intl: ^0.17.0
   formz: ^0.4.1
   hive: ^2.1.0
+  flutter_sms_inbox: ^1.0.1
+  permission_handler: ^9.2.0
+  workmanager: ^0.4.1
+  geocoding: ^2.0.4
+  geolocator: ^8.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -65,6 +74,13 @@ dev_dependencies:
 
   hive_generator: ^1.1.2
   build_runner: ^2.1.8
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  image_path: "assets/images/railway.png"
+  android: true
+  ios: true
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -89,6 +105,7 @@ flutter:
     - assets/images/
     - assets/lang/
     - assets/icons/
+    - assets/audios/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

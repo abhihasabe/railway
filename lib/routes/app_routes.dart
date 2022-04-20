@@ -1,14 +1,16 @@
-import 'package:railway_alert/Screens/authentication/auth_screen.dart';
-import 'package:railway_alert/Screens/authentication/login_screen.dart';
-import 'package:railway_alert/Screens/authentication/reg_screen.dart';
-import 'package:railway_alert/Screens/admin/admin_home_screen.dart';
-import 'package:railway_alert/Screens/employee/Emoloyee_home_screen.dart';
+import 'package:railway_alert/Screens/Admin/detail_screen.dart';
 import 'package:railway_alert/Screens/localization_screen/lang_screen.dart';
-import 'package:railway_alert/Screens/profile_screen.dart';
+import 'package:railway_alert/Screens/employee/Emoloyee_home_screen.dart';
 import 'package:railway_alert/bloc_cubits/login_cubit/login_cubit.dart';
+import 'package:railway_alert/Screens/authentication/login_screen.dart';
+import 'package:railway_alert/Screens/authentication/auth_screen.dart';
+import 'package:railway_alert/Screens/authentication/reg_screen.dart';
+import 'package:railway_alert/Screens/Admin/admin_home_screen.dart';
+import 'package:railway_alert/Screens/employee/sms_screen.dart';
 import 'package:railway_alert/controllers/MenuController.dart';
 import 'package:railway_alert/repository/auth_repository.dart';
 import 'package:railway_alert/routes/app_routes_names.dart';
+import 'package:railway_alert/Screens/profile_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:provider/provider.dart';
@@ -25,9 +27,17 @@ class Routes {
       return VxRoutePage(
           pageName: "Admin Home", child: const AdminHomeScreen());
     },
+    adminDetailScreen: (uri, params) {
+      final empId = int.parse(uri.queryParameters['id'] ?? "1");
+      return VxRoutePage(
+          pageName: "Admin Home", child: DetailScreen(empId: empId));
+    },
     empHomeScreen: (uri, params) {
       return VxRoutePage(
           pageName: "Employee Home", child: const EmployeeHomeScreen());
+    },
+    smsScreen: (uri, params) {
+      return VxRoutePage(pageName: "Employee Home", child: const SMSInbox());
     },
     registerScreen: (uri, params) {
       return VxRoutePage(pageName: "reg", child: const RegScreen());

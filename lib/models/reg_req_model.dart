@@ -2,9 +2,10 @@ class RegReqModel {
   String? name;
   String? email;
   String? phone;
-  String? deptId;
+  int? deptId;
   String? password;
-  String? user_type;
+  int? userType;
+  int? activation;
 
   RegReqModel(
       {this.name,
@@ -12,7 +13,8 @@ class RegReqModel {
       this.phone,
       this.deptId,
       this.password,
-      this.user_type});
+      this.userType,
+      this.activation});
 
   RegReqModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -20,7 +22,8 @@ class RegReqModel {
     phone = json['phone'];
     deptId = json['dept_id'];
     password = json['password'];
-    user_type = json['user_type'];
+    userType = json['user_type'];
+    activation = json['activation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,7 +33,8 @@ class RegReqModel {
     data['phone'] = this.phone;
     data['dept_id'] = this.deptId;
     data['password'] = this.password;
-    data['user_type'] = this.user_type;
+    data['user_type'] = this.userType;
+    data['activation'] = this.activation;
     return data;
   }
 }

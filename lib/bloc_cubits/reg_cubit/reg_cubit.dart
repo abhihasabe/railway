@@ -95,12 +95,14 @@ class RegCubit extends Cubit<RegState> {
   Future<void> userReg() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     RegReqModel userModel = RegReqModel(
-        name: state.name.value,
-        email: state.email.value,
-        phone: state.number.value,
-        password: state.password.value,
-        deptId: state.dept.value,
-        user_type: state.userType.value);
+      name: state.name.value,
+      email: state.email.value,
+      phone: state.number.value,
+      password: state.password.value,
+      deptId: int.parse(state.dept.value),
+      userType: int.parse(state.userType.value),
+      activation: state.userType.value == 0 ? 1 : 0,
+    );
     _authRepository.userRegistrationUser(userModel).then((value) {
       RegRespModel resRespModel = RegRespModel.fromJson(value);
       if (resRespModel != null && resRespModel.success == 0) {

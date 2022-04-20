@@ -61,7 +61,7 @@ class DialogHelper {
   static ToastFuture showToasts(String title) {
     return showToast(
       title,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 5),
       position: ToastPosition.bottom,
       backgroundColor: Colors.white,
       radius: 5.0,

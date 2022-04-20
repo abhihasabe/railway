@@ -29,7 +29,7 @@ class RegScreen extends StatefulWidget {
 class _RegScreenState extends State<RegScreen> {
   var brightness;
   List<String>? deptTypesResp = [];
-  String? _companyType = "";
+  String? _companyType = "", _userType = "";
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
@@ -49,6 +49,8 @@ class _RegScreenState extends State<RegScreen> {
       AppLocalization.of(context)!.translate('tablet')!
     ];
   }
+
+  List<String> users = ["Admin", "Employee"];
 
   @override
   void initState() {
@@ -78,7 +80,7 @@ class _RegScreenState extends State<RegScreen> {
             DialogHelper.dismissDialog(context);
           } else if (state.status.isSubmissionSuccess) {
             DialogHelper.showToasts("Registration Successfully");
-            VxNavigator.of(context).push(Uri.parse(loginScreen));
+            VxNavigator.of(context).clearAndPush(Uri.parse(loginScreen));
           } else if (state.status.isSubmissionInProgress) {
             DialogHelper.showLoaderDialog(context);
           }
@@ -98,16 +100,17 @@ class _RegScreenState extends State<RegScreen> {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildLogo(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _buildContainer(state)
-                  ],
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //_buildLogo(),
+                      const SizedBox(height: 20),
+                      _buildContainer(state)
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -132,7 +135,7 @@ class _RegScreenState extends State<RegScreen> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.75,
+            height: MediaQuery.of(context).size.height * 0.85,
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -145,7 +148,7 @@ class _RegScreenState extends State<RegScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _buildTitleWidget(),
-                    const SizedBox(height: DIMENSION_30),
+                    const SizedBox(height: DIMENSION_20),
                     InputTextFormFieldWidget(
                       controller: _userNameController,
                       hintText: AppLocalization.of(context)!.translate('uname'),
@@ -233,11 +236,11 @@ class _RegScreenState extends State<RegScreen> {
                         Icons.account_balance,
                         color: hoverColorDarkColor,
                       ),
-                      items: getUserType(context),
-                      value: _companyType,
+                      items: users,
+                      value: _userType,
                       onChoose: (newValue, index) {
                         setState(() {
-                          _companyType = newValue;
+                          _userType = newValue;
                           FocusScope.of(context).requestFocus(FocusNode());
                           context.read<RegCubit>().userTypeChanged(index + 1);
                         });
@@ -275,7 +278,7 @@ class _RegScreenState extends State<RegScreen> {
                       hintText: AppLocalization.of(context)!.translate('cpass'),
                       textCapitalization: TextCapitalization.sentences,
                       textInputType: TextInputType.text,
-                      actionKeyboard: TextInputAction.next,
+                      actionKeyboard: TextInputAction.done,
                       obscureText: false,
                       showSuffixIcon: false,
                       maxLine: ONE,
@@ -292,10 +295,10 @@ class _RegScreenState extends State<RegScreen> {
                       parametersValidate:
                           AppLocalization.of(context)!.translate('pecpass'),
                     ),
-                    const SizedBox(height: DIMENSION_10),
+                    const SizedBox(height: DIMENSION_20),
                     ButtonWidget(
                       width: double.infinity,
-                      title: AppLocalization.of(context)!.translate('signout'),
+                      title: AppLocalization.of(context)!.translate('signup'),
                       height: DIMENSION_42,
                       bTitleBold: true,
                       bgColor: (brightness == Brightness.dark)
@@ -375,7 +378,7 @@ class _RegScreenState extends State<RegScreen> {
   _buildTitleWidget() {
     return TextWidget(
       text: AppLocalization.of(context)!.translate('signup'),
-      small: true,
+      big: true,
       bold: true,
       textColor:
           (brightness == Brightness.dark) ? primaryDarkColor : primaryColor,

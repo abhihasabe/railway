@@ -13,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
       var userEmail =
           await SecStore.getValue(keyVal: SharedPreferencesConstant.USEREMAIL);
       var userType =
-          await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTTYPE);
+          await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID);
       if (userEmail != null && userType != null) {
         emit(const AuthLoginSuccess());
       } else {

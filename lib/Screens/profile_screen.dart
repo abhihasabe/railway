@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   getUserData() async {
     userType =
-        await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTTYPE);
+        await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID);
     setState(() {});
   }
 
@@ -307,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   onTap: () {
                     context.read<LoginCubit>().logout();
-                    VxNavigator.of(context).push(Uri.parse(loginScreen));
+                    VxNavigator.of(context).clearAndPush(Uri.parse(loginScreen));
                   },
                 ),
               ),

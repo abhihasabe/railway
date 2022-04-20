@@ -34,20 +34,44 @@ class APIManager {
     return responseJson;
   }
 
-  static Future<dynamic> postAPICall(String basePath, Map param, token) async {
+  static Future<dynamic> postAPICall(String basePath, Map param) async {
     var responseJson;
     final uri = Uri.parse(BASE_URL + basePath);
     final inputJSON = json.encode(param);
     Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token'
+      'Accept': 'application/json'
     };
     print("posturi $uri");
     print("postinputJSON $inputJSON");
     try {
       await http
           .post(uri, headers: headers, body: inputJSON, encoding: encoding)
+          .then((response) {
+        responseJson = _response(response);
+        print("postresponseJson $responseJson");
+      }).catchError((onError) {
+        print("onError " + onError.toString());
+      });
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  static Future<dynamic> updateAPICall(String basePath, Map param) async {
+    var responseJson;
+    final uri = Uri.parse(BASE_URL + basePath);
+    final inputJSON = json.encode(param);
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    print("posturi $uri");
+    print("postinputJSON $inputJSON");
+    try {
+      await http
+          .patch(uri, headers: headers, body: inputJSON, encoding: encoding)
           .then((response) {
         responseJson = _response(response);
         print("postresponseJson $responseJson");
@@ -73,6 +97,29 @@ class APIManager {
       await http.get(url, headers: headers).then((response) {
         print("getresponseJson $response");
         responseJson = _response(response);
+        print("getresponseJson $responseJson");
+      }).catchError((onError) {
+        print("onError " + onError.toString());
+      });
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+    return responseJson;
+  }
+
+  static Future<dynamic> smsAPICall(String basePath) async {
+    var responseJson;
+    var url = Uri.parse(basePath);
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+    print("posturi $url");
+    print("postinputJSON $headers");
+    try {
+      await http.get(url, headers: headers).then((response) {
+        print("getresponseJson $response");
+        responseJson = response;
         print("getresponseJson $responseJson");
       }).catchError((onError) {
         print("onError " + onError.toString());

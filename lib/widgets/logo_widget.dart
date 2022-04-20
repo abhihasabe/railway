@@ -10,7 +10,7 @@ class LogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _logo = const AssetImage("assets/images/logo.png");
+    var _logo = const AssetImage("assets/images/railway.png");
     var _logoHeader = const AssetImage("assets/images/logo_header.png");
     var _logoDark = const AssetImage("assets/images/logo_dark.png");
 
@@ -24,7 +24,7 @@ class LogoWidget extends StatelessWidget {
     return Image(
       image: _finalLogoWidget,
       width: small == true
-          ? 100
+          ? 80
           : header == true
               ? 100
               : 220,

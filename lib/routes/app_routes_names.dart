@@ -22,4 +22,6 @@ const String initialScreen = '/';
 //HR
 
 const String adminHomeScreen = 'adminHome';
+const String adminDetailScreen = 'adminDetail';
 const String empHomeScreen = 'employeeHome';
+const String smsScreen = 'sms';

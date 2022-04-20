@@ -23,6 +23,8 @@ class ButtonWidget extends StatelessWidget {
   bool? bTitleS;
   bool? bTitleSM;
   bool? bTitleBold;
+  bool? bMedium;
+  bool? bTitleSmaller;
 
   ButtonWidget(
       {Key? key,
@@ -46,7 +48,9 @@ class ButtonWidget extends StatelessWidget {
       this.bTitleBold,
       this.bTitleLg,
       this.bTitleMd,
-      this.bTitleSM})
+      this.bTitleSM,
+      this.bMedium,
+      this.bTitleSmaller})
       : super(key: key);
 
   @override
@@ -84,8 +88,10 @@ class ButtonWidget extends StatelessWidget {
           onPressed: onClick,
           child: TextWidget(
             text: title?.toUpperCase() ?? "Label",
+            smaller: bTitleSmaller,
             small: bTitleS,
             bold: bTitleBold,
+            medium: bMedium,
             textColor: buttonTextColor,
           )),
     );

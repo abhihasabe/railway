@@ -47,21 +47,33 @@ class LoginCubit extends Cubit<LoginState> {
             exceptionError: result.message));
       } else {
         SecStore.setValue(
-            keyVal: SharedPreferencesConstant.USEREMAIL,
-            value: result.data!.email.toString());
-        SecStore.setValue(
-            keyVal: SharedPreferencesConstant.DEPTTYPE,
-            value: result.data!.deptId.toString());
-        SecStore.setValue(
-            keyVal: SharedPreferencesConstant.ACTIVATION,
-            value: result.data!.activation.toString());
-        SecStore.setValue(
-                keyVal: SharedPreferencesConstant.USERTYPEID,
-                value: result.data!.userType.toString())
+                keyVal: SharedPreferencesConstant.EMPLOYEEID,
+                value: result.data!.id.toString())
             .then((value) {
-          emit(state.copyWith(status: FormzStatus.submissionSuccess));
+          SecStore.setValue(
+                  keyVal: SharedPreferencesConstant.USERTYPEID,
+                  value: result.data!.userType.toString())
+              .then((value) {
+            SecStore.setValue(
+                    keyVal: SharedPreferencesConstant.ACTIVATION,
+                    value: result.data!.activation.toString())
+                .then((value) {
+              SecStore.setValue(
+                      keyVal: SharedPreferencesConstant.DEPTID,
+                      value: result.data!.deptId.toString())
+                  .then((value) {
+                SecStore.setValue(
+                        keyVal: SharedPreferencesConstant.USEREMAIL,
+                        value: result.data!.email.toString())
+                    .then((value) {
+                  emit(state.copyWith(status: FormzStatus.submissionSuccess));
+                });
+              });
+            });
+          });
         });
       }
     });
   }
+
 }

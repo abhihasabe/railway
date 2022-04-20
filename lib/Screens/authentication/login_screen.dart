@@ -77,15 +77,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildLogo(),
-                  const SizedBox(
-                    height: 20,
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildLogo(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      _buildContainer(state),
+                    ],
                   ),
-                  _buildContainer(state),
-                ],
+                ),
               ),
             ],
           );
@@ -140,109 +145,111 @@ class _LoginScreenState extends State<LoginScreen> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery.of(context).size.height * 0.42,
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: const BoxDecoration(
               color: Colors.white,
             ),
             child: Padding(
               padding: const EdgeInsets.all(22.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildTitleWidget(),
-                  const SizedBox(height: DIMENSION_30),
-                  InputTextFormFieldWidget(
-                    key: const Key("emailKey"),
-                    maxLine: ONE,
-                    controller: _emailController,
-                    hintText: AppLocalization.of(context)?.translate('email'),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputType: TextInputType.emailAddress,
-                    actionKeyboard: TextInputAction.next,
-                    prefixIcon: const Icon(
-                      Icons.email,
-                      color: hoverColorDarkColor,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildTitleWidget(),
+                    const SizedBox(height: DIMENSION_30),
+                    InputTextFormFieldWidget(
+                      key: const Key("emailKey"),
+                      maxLine: ONE,
+                      controller: _emailController,
+                      hintText: AppLocalization.of(context)?.translate('email'),
+                      textCapitalization: TextCapitalization.sentences,
+                      textInputType: TextInputType.emailAddress,
+                      actionKeyboard: TextInputAction.next,
+                      prefixIcon: const Icon(
+                        Icons.email,
+                        color: hoverColorDarkColor,
+                      ),
+                      errorMessage: state.email.invalid
+                          ? AppLocalization.of(context)?.translate('peveid')
+                          : null,
+                      onChange: (name) =>
+                          context.read<LoginCubit>().emailChanged(name),
+                      parametersValidate:
+                          AppLocalization.of(context)?.translate('peeid'),
                     ),
-                    errorMessage: state.email.invalid
-                        ? AppLocalization.of(context)?.translate('peveid')
-                        : null,
-                    onChange: (name) =>
-                        context.read<LoginCubit>().emailChanged(name),
-                    parametersValidate:
-                        AppLocalization.of(context)?.translate('peeid'),
-                  ),
-                  const SizedBox(height: DIMENSION_12),
-                  InputTextFormFieldWidget(
-                    key: const Key("passwordKey"),
-                    controller: _passwordController,
-                    hintText:
-                        AppLocalization.of(context)?.translate('password'),
-                    textCapitalization: TextCapitalization.sentences,
-                    textInputType: TextInputType.text,
-                    actionKeyboard: TextInputAction.done,
-                    obscureText: true,
-                    showSuffixIcon: true,
-                    maxLine: ONE,
-                    suffixIcon: const Icon(Icons.visibility,
-                        color: hoverColorDarkColor),
-                    prefixIcon:
-                        const Icon(Icons.lock, color: hoverColorDarkColor),
-                    errorMessage: state.password.invalid
-                        ? AppLocalization.of(context)?.translate('pepass')
-                        : null,
-                    onChange: (name) =>
-                        context.read<LoginCubit>().passwordChanged(name),
-                    parametersValidate:
-                        AppLocalization.of(context)?.translate('pepass'),
-                  ),
-                  const SizedBox(height: DIMENSION_25),
-                  ButtonWidget(
-                    key: const Key("buttonKey"),
-                    width: double.infinity,
-                    title: AppLocalization.of(context)?.translate('signin'),
-                    height: DIMENSION_42,
-                    bTitleBold: true,
-                    bgColor: (brightness == Brightness.dark)
-                        ? buttonDarkColor
-                        : buttonColor,
-                    textColor: (brightness == Brightness.dark)
-                        ? buttonDarkTextColor
-                        : buttonTextColor,
-                    disabledBgColor: (brightness == Brightness.dark)
-                        ? disabledDarkColor
-                        : disabledColor,
-                    disabledTextColor: (brightness == Brightness.dark)
-                        ? disabledTextDarkColor
-                        : disabledTextColor,
-                    bTitleS: true,
-                    borderRadius: DIMENSION_5,
-                    onClick: isPopulated && state.status.isValidated
-                        ? () {
-                            Network().check().then((intenet) {
-                              if (intenet != null && intenet) {
-                                context.read<LoginCubit>().userLogin();
-                              } else {
-                                showToast(
-                                  "Please Check Internet Connection",
-                                  duration: const Duration(seconds: 3),
-                                  position: ToastPosition.bottom,
-                                  backgroundColor:
-                                      Colors.black.withOpacity(0.8),
-                                  radius: 13.0,
-                                  textStyle: const TextStyle(fontSize: 18.0),
-                                );
-                              }
-                            });
-                          }
-                        : null,
-                  ),
-                  const SizedBox(
-                    height: DIMENSION_10,
-                  ),
-                  _buildSignUpText()
-                ],
+                    const SizedBox(height: DIMENSION_12),
+                    InputTextFormFieldWidget(
+                      key: const Key("passwordKey"),
+                      controller: _passwordController,
+                      hintText:
+                          AppLocalization.of(context)?.translate('password'),
+                      textCapitalization: TextCapitalization.sentences,
+                      textInputType: TextInputType.text,
+                      actionKeyboard: TextInputAction.done,
+                      obscureText: true,
+                      showSuffixIcon: true,
+                      maxLine: ONE,
+                      suffixIcon: const Icon(Icons.visibility,
+                          color: hoverColorDarkColor),
+                      prefixIcon:
+                          const Icon(Icons.lock, color: hoverColorDarkColor),
+                      errorMessage: state.password.invalid
+                          ? AppLocalization.of(context)?.translate('pepass')
+                          : null,
+                      onChange: (name) =>
+                          context.read<LoginCubit>().passwordChanged(name),
+                      parametersValidate:
+                          AppLocalization.of(context)?.translate('pepass'),
+                    ),
+                    const SizedBox(height: DIMENSION_25),
+                    ButtonWidget(
+                      key: const Key("buttonKey"),
+                      width: double.infinity,
+                      title: AppLocalization.of(context)?.translate('signin'),
+                      height: DIMENSION_42,
+                      bTitleBold: true,
+                      bgColor: (brightness == Brightness.dark)
+                          ? buttonDarkColor
+                          : buttonColor,
+                      textColor: (brightness == Brightness.dark)
+                          ? buttonDarkTextColor
+                          : buttonTextColor,
+                      disabledBgColor: (brightness == Brightness.dark)
+                          ? disabledDarkColor
+                          : disabledColor,
+                      disabledTextColor: (brightness == Brightness.dark)
+                          ? disabledTextDarkColor
+                          : disabledTextColor,
+                      bTitleS: true,
+                      borderRadius: DIMENSION_5,
+                      onClick: isPopulated && state.status.isValidated
+                          ? () {
+                              Network().check().then((intenet) {
+                                if (intenet != null && intenet) {
+                                  context.read<LoginCubit>().userLogin();
+                                } else {
+                                  showToast(
+                                    "Please Check Internet Connection",
+                                    duration: const Duration(seconds: 3),
+                                    position: ToastPosition.bottom,
+                                    backgroundColor:
+                                        Colors.black.withOpacity(0.8),
+                                    radius: 13.0,
+                                    textStyle: const TextStyle(fontSize: 18.0),
+                                  );
+                                }
+                              });
+                            }
+                          : null,
+                    ),
+                    const SizedBox(
+                      height: DIMENSION_10,
+                    ),
+                    _buildSignUpText()
+                  ],
+                ),
               ),
             ),
           ))
@@ -258,18 +265,27 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   callScreen() async {
-    await SecStore.getValue(keyVal: SharedPreferencesConstant.USERTYPEID)
-        .then((userType) {
-      SecStore.getValue(keyVal: SharedPreferencesConstant.ACTIVATION)
-          .then((activation) {
-        if (userType == "1" && activation == "1") {
-          VxNavigator.of(context).push(Uri.parse(adminHomeScreen));
-        } else if (userType == "1" && activation == "0") {
-          DialogHelper.showToasts(
-              "Please Contact With Admin for activate your Account");
-        } else {
-          VxNavigator.of(context).push(Uri.parse(empHomeScreen));
-        }
+    dynamic depValue;
+    await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
+        .then((deptId) {
+      depValue = deptId;
+      SecStore.getValue(keyVal: SharedPreferencesConstant.USERTYPEID)
+          .then((userId) {
+        SecStore.getValue(keyVal: SharedPreferencesConstant.ACTIVATION)
+            .then((activation) {
+          if (userId == "2" && activation == "1" && depValue == deptId) {
+            VxNavigator.of(context).clearAndPush(Uri.parse(empHomeScreen));
+          } else if (userId == "2" && activation == "0" && depValue == deptId) {
+            DialogHelper.showToasts(
+                "Please Contact With Admin for activate your Account");
+            DialogHelper.dismissDialog(context);
+          } else if (depValue == deptId) {
+            SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
+                .then((value) {
+              VxNavigator.of(context).clearAndPush(Uri.parse(adminHomeScreen));
+            });
+          }
+        });
       });
     });
   }

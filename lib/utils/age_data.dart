@@ -333,4 +333,11 @@ getCountries(BuildContext context) {
   ];
 }
 
+getUserType(BuildContext context) {
+  return medicineType = [
+    AppLocalization.of(context)!.translate('liquid')!,
+    AppLocalization.of(context)!.translate('tablet')!
+  ];
+}
+
 //https://stackoverflow.com/questions/51601519/how-to-decode-json-in-flutter
