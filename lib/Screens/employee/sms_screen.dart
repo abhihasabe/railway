@@ -24,18 +24,29 @@ class _SMSInboxState extends State<SMSInbox> {
       body: FutureBuilder(
         future: fetchSMS(),
         builder: (context, snapshot) {
-          return ListView.separated(
-              separatorBuilder: (context, index) => const Divider(
-                    color: Colors.black,
-                  ),
-              itemCount: _messages.length,
-              itemBuilder: (context, index) {
-                var message = _messages[index];
-                return ListTile(
-                  title: Text('${message.sender} [${message.date}]'),
-                  subtitle: Text('${message.body}'),
-                );
-              });
+          return RefreshIndicator(
+            displacement: 250,
+            backgroundColor: primaryColor,
+            color: Colors.white,
+            strokeWidth: 3,
+            triggerMode: RefreshIndicatorTriggerMode.onEdge,
+            onRefresh: () async {
+              await Future.delayed(Duration(milliseconds: 1000));
+              fetchSMS();
+            },
+            child: ListView.separated(
+                separatorBuilder: (context, index) => const Divider(
+                      color: Colors.black,
+                    ),
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  var message = _messages[index];
+                  return ListTile(
+                    title: Text('${message.sender} [${message.date}]'),
+                    subtitle: Text('${message.body}'),
+                  );
+                }),
+          );
         },
       ),
     );
@@ -44,8 +55,8 @@ class _SMSInboxState extends State<SMSInbox> {
   fetchSMS() async {
     var permission = await Permission.sms.status;
     if (permission.isGranted) {
-      final messages = await _query.querySms(
-          kinds: [SmsQueryKind.values.first], address: 'AX-RNGRTI');
+      final messages = await _query
+          .querySms(kinds: [SmsQueryKind.values.first], address: 'AD-GKWRKS');
       setState(() => _messages = messages);
     } else {
       await Permission.sms.request();

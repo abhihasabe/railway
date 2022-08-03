@@ -1,6 +1,7 @@
 import 'package:railway_alert/Screens/Admin/detail_screen.dart';
 import 'package:railway_alert/Screens/localization_screen/lang_screen.dart';
 import 'package:railway_alert/Screens/employee/Emoloyee_home_screen.dart';
+import 'package:railway_alert/Screens/super_admin/super_admin_home_screen.dart';
 import 'package:railway_alert/bloc_cubits/login_cubit/login_cubit.dart';
 import 'package:railway_alert/Screens/authentication/login_screen.dart';
 import 'package:railway_alert/Screens/authentication/auth_screen.dart';
@@ -25,12 +26,16 @@ class Routes {
     },
     adminHomeScreen: (uri, params) {
       return VxRoutePage(
-          pageName: "Admin Home", child: const AdminHomeScreen());
+          pageName: "admin Home", child: const AdminHomeScreen());
+    },
+    superAdminHomeScreen: (uri, params) {
+      return VxRoutePage(
+          pageName: "super admin Home", child: const SuperAdminHomeScreen());
     },
     adminDetailScreen: (uri, params) {
       final empId = int.parse(uri.queryParameters['id'] ?? "1");
       return VxRoutePage(
-          pageName: "Admin Home", child: DetailScreen(empId: empId));
+          pageName: "admin Home", child: DetailScreen(empId: empId));
     },
     empHomeScreen: (uri, params) {
       return VxRoutePage(

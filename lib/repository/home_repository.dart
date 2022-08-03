@@ -9,13 +9,24 @@ class HomeRepository {
     return resp;
   }
 
+  Future fetchAdminData(String value) async {
+    resp = APIManager.getAPICall("$GET_EMP_URL/${int.parse(value)}/1");
+    return resp;
+  }
+
   Future fetchEmployeeLocationData(int value) async {
     resp = APIManager.getAPICall("$GET_ADDRESS_URL/$value");
     return resp;
   }
 
-  Future updateActivation(int userId) async {
+  Future activeActivation(int userId) async {
     var jsonInput = {"activation": 1};
+    resp = APIManager.updateAPICall("$UPDATE_EMP_URL/$userId}", jsonInput);
+    return resp;
+  }
+
+  Future dActiveActivation(int userId) async {
+    var jsonInput = {"activation": 0};
     resp = APIManager.updateAPICall("$UPDATE_EMP_URL/$userId}", jsonInput);
     return resp;
   }
@@ -25,7 +36,7 @@ class HomeRepository {
     return resp;
   }
 
-  Future getStationLocationById(value) async{
+  Future getStationLocationById(value) async {
     resp = APIManager.getAPICall("$DEPT_ID_URL/$value");
     print("resp $resp");
     return resp;

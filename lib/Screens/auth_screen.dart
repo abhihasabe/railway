@@ -21,7 +21,7 @@ class Auth extends StatelessWidget {
             VxNavigator.of(context).push(Uri.parse(empHomeScreen));
           } else if (userId == "2" && activation == "0" && depValue == deptId) {
             DialogHelper.showToasts(
-                "Please Contact With Admin for activate your Account");
+                "Please Contact With admin for activate your Account");
             DialogHelper.dismissDialog(context);
           } else if (depValue == deptId) {
             SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)

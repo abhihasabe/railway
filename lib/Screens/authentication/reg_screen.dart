@@ -36,12 +36,14 @@ class _RegScreenState extends State<RegScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  bool showValue = false;
 
   bool get isPopulated =>
       _userNameController.text.isNotEmpty &&
       _emailController.text.isNotEmpty &&
       _passwordController.text.isNotEmpty &&
-      _confirmPasswordController.text.isNotEmpty;
+      _confirmPasswordController.text.isNotEmpty &&
+      showValue == true;
 
   getUserType(BuildContext context) {
     return medicineType = [
@@ -50,7 +52,7 @@ class _RegScreenState extends State<RegScreen> {
     ];
   }
 
-  List<String> users = ["Admin", "Employee"];
+  List<String> users = ["admin", "Employee"];
 
   @override
   void initState() {
@@ -135,7 +137,7 @@ class _RegScreenState extends State<RegScreen> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.85,
+            height: MediaQuery.of(context).size.height * 0.93,
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -295,6 +297,52 @@ class _RegScreenState extends State<RegScreen> {
                       parametersValidate:
                           AppLocalization.of(context)!.translate('pecpass'),
                     ),
+                    const SizedBox(height: DIMENSION_10),
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      Checkbox(
+                        value: showValue,
+                        onChanged: (value) async {
+                          setState(() {
+                            showValue = value!;
+                            print("object $showValue");
+                          });
+                        },
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Padding(
+                                padding: const EdgeInsets.only(bottom: 18.0),
+                                child: Text("Terms & Condition"),
+                              ),
+                              content: SingleChildScrollView(
+                                child: Text(
+                                    "1) The siron sound ringing in Mobile is depend on text message ring. If mobile didnot have network then there may be delay for siron sound.\n\n"
+                                    "2) Always alerted for breakdown duties never depend on mobile phone siron.\n\n"
+                                    "3) If you are in no network zone then inform it to your concern supervisor.\n\n"
+                                    "4) Never switch off your mobile phone, it may lead to no siron sound from mobile.\n\n"
+                                    "5) Always give all necessary permission required to app. If you denied permission then it will malfunction app or no siron sound from mobile.\n\n"
+                                    "6) This app is developed for additional alerting system. Donot completely depend on this app."),
+                              ),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(ctx).pop();
+                                  },
+                                  child: Text("okay"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        child: TextWidget(
+                          text: "Agree to Terms & Conditions",
+                          small: true,
+                        ),
+                      )
+                    ]),
                     const SizedBox(height: DIMENSION_20),
                     ButtonWidget(
                       width: double.infinity,
@@ -328,7 +376,7 @@ class _RegScreenState extends State<RegScreen> {
                                     backgroundColor:
                                         Colors.black.withOpacity(0.8),
                                     radius: 13.0,
-                                    textStyle: const TextStyle(fontSize: 18.0),
+                                    textStyle: const TextStyle(fontSize: 14.0),
                                   );
                                 }
                               });

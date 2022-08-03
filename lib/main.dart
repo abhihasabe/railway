@@ -15,9 +15,7 @@ import 'package:railway_alert/storage/local/hive_helper.dart';
 import 'package:railway_alert/routes/app_routes.dart';
 import 'package:railway_alert/theme/app_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/src/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -52,8 +50,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: AppThemes.lightTheme,
                 darkTheme: AppThemes.darkTheme,
-                themeMode: context.select(
-                    (ThemeCubit themeCubit) => themeCubit.state.themeMode),
+                themeMode: context.select((ThemeCubit themeCubit) => themeCubit.state.themeMode),
                 routeInformationParser: VxInformationParser(),
                 routerDelegate: Routes.routerDelegate,
                 locale: state.locale,

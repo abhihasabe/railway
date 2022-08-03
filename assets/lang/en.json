@@ -113,6 +113,6 @@
   "iinhuymd": "Injection Instruction, Need help using your master device ?",
   "mtl": "Medicine Taken Location",
   "mt": "Medicine Type",
-  "dpty": "Department",
-  "psd": "Please Select Department"
+  "dpty": "ART/ARME/SPART",
+  "psd": "Please Select ART/ARME/SPART"
 }

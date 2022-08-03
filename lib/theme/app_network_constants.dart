@@ -1,5 +1,6 @@
 /// Get token api path */
-const BASE_URL = 'https://railwayapis.herokuapp.com';
+const BASE_URL = 'https://railway-alert.herokuapp.com';
+//const BASE_URL = 'https://railwayapis.herokuapp.com';
 
 const LOGIN_URL = '/api/v1/base/login';
 const REG_URL = '/api/v1/base/addEmployee';

@@ -21,7 +21,8 @@ const String langScreen = 'lang';
 const String initialScreen = '/';
 //HR
 
+const String superAdminHomeScreen = 'superAdminHome';
 const String adminHomeScreen = 'adminHome';
-const String adminDetailScreen = 'adminDetail';
 const String empHomeScreen = 'employeeHome';
+const String adminDetailScreen = 'adminDetail';
 const String smsScreen = 'sms';

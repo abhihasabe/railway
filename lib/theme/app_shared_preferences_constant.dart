@@ -6,4 +6,5 @@ class SharedPreferencesConstant {
   static String EMPLOYEETYPEID = "emptype";
   static String USERTYPEID = "usertype";
   static String ACTIVATION = "activation";
+  static String ISPRESENT = "isPresent";
 }

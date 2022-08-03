@@ -1,25 +1,22 @@
+import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
 import 'package:railway_alert/bloc_cubits/login_cubit/login_cubit.dart';
 import 'package:railway_alert/bloc_cubits/login_cubit/login_state.dart';
-import 'package:railway_alert/localization/app_localization.dart';
-import 'package:railway_alert/network/network.dart';
-import 'package:railway_alert/routes/app_routes.dart' as route;
-import 'package:railway_alert/routes/app_routes.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
 import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
+import 'package:railway_alert/localization/app_localization.dart';
 import 'package:railway_alert/widgets/input_field_widget.dart';
-import 'package:railway_alert/helper/snackbar_helper.dart';
-import 'package:railway_alert/widgets/logo_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:railway_alert/routes/app_routes_names.dart';
 import 'package:railway_alert/widgets/button_widget.dart';
 import 'package:railway_alert/helper/dialog.helper.dart';
 import 'package:railway_alert/theme/app_dimension.dart';
 import 'package:railway_alert/widgets/text_widget.dart';
+import 'package:railway_alert/widgets/logo_widget.dart';
 import 'package:railway_alert/theme/app_colors.dart';
-import 'package:flutter/material.dart';
-import 'package:formz/formz.dart';
-import 'package:oktoast/oktoast.dart';
+import 'package:railway_alert/network/network.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
+import 'package:formz/formz.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -145,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.42,
+            height: MediaQuery.of(context).size.height * 0.47,
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -229,7 +226,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               Network().check().then((intenet) {
                                 if (intenet != null && intenet) {
                                   context.read<LoginCubit>().userLogin();
-                                } else {
+                                }
+                                else {
                                   showToast(
                                     "Please Check Internet Connection",
                                     duration: const Duration(seconds: 3),
@@ -237,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     backgroundColor:
                                         Colors.black.withOpacity(0.8),
                                     radius: 13.0,
-                                    textStyle: const TextStyle(fontSize: 18.0),
+                                    textStyle: const TextStyle(fontSize: 14.0),
                                   );
                                 }
                               });
@@ -277,12 +275,22 @@ class _LoginScreenState extends State<LoginScreen> {
             VxNavigator.of(context).clearAndPush(Uri.parse(empHomeScreen));
           } else if (userId == "2" && activation == "0" && depValue == deptId) {
             DialogHelper.showToasts(
-                "Please Contact With Admin for activate your Account");
+                "Please contact with admin for activate your Account");
             DialogHelper.dismissDialog(context);
-          } else if (depValue == deptId) {
+          } else if (userId == "1" && activation == "1" && depValue == deptId) {
             SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
                 .then((value) {
               VxNavigator.of(context).clearAndPush(Uri.parse(adminHomeScreen));
+            });
+          } else if (userId == "1" && activation == "0" && depValue == deptId) {
+            DialogHelper.showToasts(
+                "Please contact with super admin for activate your Account");
+            DialogHelper.dismissDialog(context);
+          } else if (userId == "0" && depValue == deptId) {
+            SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
+                .then((value) {
+              VxNavigator.of(context)
+                  .clearAndPush(Uri.parse(superAdminHomeScreen));
             });
           }
         });

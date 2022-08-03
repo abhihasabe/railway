@@ -6,19 +6,15 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit(this.langRepository)
-      : super(const ThemeState(themeMode: ThemeMode.light)) {
-    updateAppTheme();
-    changeStartLang();
-  }
-
   LangRepository langRepository;
+
+  ThemeCubit(this.langRepository) : super(const ThemeState(themeMode: ThemeMode.light)) {
+    updateAppTheme();changeStartLang();
+  }
 
   void updateAppTheme() {
     final Brightness? currentBrightness = AppThemes.currentSystemBrightness;
-    currentBrightness == Brightness.light
-        ? _setTheme(ThemeMode.light)
-        : _setTheme(ThemeMode.dark);
+    currentBrightness == Brightness.light ? _setTheme(ThemeMode.light) : _setTheme(ThemeMode.dark);
   }
 
   void _setTheme(ThemeMode themeMode) {

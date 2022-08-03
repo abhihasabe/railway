@@ -24,6 +24,19 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  Future getAdminUser(String value) async {
+    emit(const HomeLoading());
+    _homeRepository.fetchAdminData(value).then((value) {
+      EmpResp empResp = EmpResp.fromJson(value);
+      List<EmpData> empData = List<EmpData>.from(empResp.data!);
+      if (empResp != null && empResp.success == 1) {
+        emit(HomeSuccess(message: "data found", countData: empData));
+      } else {
+        emit(const HomeFailure(errorMessage: 'data not found'));
+      }
+    });
+  }
+
   Future getUserLocation(int value) async {
     emit(const HomeLoading());
     _homeRepository.fetchEmployeeLocationData(value).then((value) {
@@ -39,7 +52,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future updateActivation(int userId) async {
     emit(const HomeLoading());
-    _homeRepository.updateActivation(userId);
+    _homeRepository.activeActivation(userId);
+  }
+
+  Future dUpdateActivation(int userId) async {
+    emit(const HomeLoading());
+    _homeRepository.dActiveActivation(userId);
   }
 
   Future logout() async {
