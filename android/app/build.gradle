@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.railway_alert"
+        applicationId "com.example.rapid_response"
         minSdkVersion 20
         multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion

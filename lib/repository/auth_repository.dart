@@ -1,6 +1,6 @@
-import 'package:railway_alert/theme/app_network_constants.dart';
-import 'package:railway_alert/models/reg_req_model.dart';
-import 'package:railway_alert/network/api_calls.dart';
+import 'package:rapid_response/theme/app_network_constants.dart';
+import 'package:rapid_response/models/reg_req_model.dart';
+import 'package:rapid_response/network/api_calls.dart';
 
 class AuthRepository {
   dynamic resp;
@@ -12,7 +12,6 @@ class AuthRepository {
   }
 
   Future userRegistrationUser(RegReqModel employeeModel) {
-    print("employeeModel $employeeModel");
     var regJson = {
       "name": "${employeeModel.name}" != "null" ? "${employeeModel.name}" : "",
       "email":

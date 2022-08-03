@@ -1,5 +1,5 @@
-import 'package:railway_alert/theme/app_font_size.dart' as dimens;
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/theme/app_font_size.dart' as dimens;
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {

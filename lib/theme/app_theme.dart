@@ -1,4 +1,4 @@
-import 'package:railway_alert/theme/app_fonts.dart';
+import 'package:rapid_response/theme/app_fonts.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
@@ -78,8 +78,7 @@ class AppThemes {
     colorScheme: const ColorScheme.light(),
   );
 
-  static Brightness get currentSystemBrightness =>
-      SchedulerBinding.instance!.window.platformBrightness;
+  static Brightness get currentSystemBrightness => SchedulerBinding.instance!.window.platformBrightness;
 
   static TextTheme _customTextTheme(TextTheme base, Color color, String theme) {
     return base

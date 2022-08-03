@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:railway_alert/widgets/text_widget.dart';
+import 'package:rapid_response/widgets/text_widget.dart';
 
 class ButtonWidget extends StatelessWidget {
   VoidCallback? onClick;

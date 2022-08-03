@@ -1,6 +1,6 @@
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/bloc_cubits/auth_cubit/auth_state.dart';
+import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/bloc_cubits/auth_cubit/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'dart:async';

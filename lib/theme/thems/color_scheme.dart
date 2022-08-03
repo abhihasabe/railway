@@ -1,5 +1,5 @@
-import 'package:railway_alert/theme/thems/colors_extension.dart';
-import 'package:railway_alert/theme/thems/app_constants.dart';
+import 'package:rapid_response/theme/thems/colors_extension.dart';
+import 'package:rapid_response/theme/thems/app_constants.dart';
 import 'package:flutter/material.dart';
 
 final ColorScheme darkColorScheme = ColorScheme.dark(

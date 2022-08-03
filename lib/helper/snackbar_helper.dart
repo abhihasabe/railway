@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:railway_alert/theme/app_colors.dart' as colors;
+import 'package:rapid_response/theme/app_colors.dart' as colors;
 import '../widgets/text_widget.dart';
 
 class CustomWidgets {

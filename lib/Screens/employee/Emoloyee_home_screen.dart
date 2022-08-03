@@ -1,14 +1,14 @@
-import 'package:railway_alert/bloc_cubits/address_cubit/address_cubit.dart';
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
-import 'package:railway_alert/bloc_cubits/login_cubit/login_cubit.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/bloc_cubits/address_cubit/address_cubit.dart';
+import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
+import 'package:rapid_response/bloc_cubits/login_cubit/login_cubit.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
 import 'package:background_location/background_location.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
-import 'package:railway_alert/widgets/button_widget.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
-import 'package:railway_alert/helper/dialog.helper.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
+import 'package:rapid_response/widgets/button_widget.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
+import 'package:rapid_response/helper/dialog.helper.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:telephony/telephony.dart';
@@ -251,15 +251,7 @@ class _AdminHomeScreenState extends State<EmployeeHomeScreen> {
 
   void getLocation(String latitude, String location, String time) {
     if (latitude != null && longitude != null) {
-      print("latitude $latitude");
-      print("longitude $longitude");
-      print("time $time");
-      context
-          .read<AddressCubit>()
-          .addAddress(latitude, longitude, time, empId)
-          .then((value) {
-        print("value $value");
-      });
+      context.read<AddressCubit>().addAddress(latitude, longitude, time, empId);
     }
   }
 }

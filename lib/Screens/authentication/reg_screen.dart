@@ -1,21 +1,20 @@
-import 'package:railway_alert/bloc_cubits/reg_cubit/reg_cubit.dart';
-import 'package:railway_alert/bloc_cubits/reg_cubit/reg_state.dart';
-import 'package:railway_alert/localization/app_localization.dart';
-import 'package:railway_alert/network/network.dart';
-import 'package:railway_alert/utils/age_data.dart';
-import 'package:railway_alert/widgets/dropdown_widget.dart';
-import 'package:railway_alert/widgets/input_field_widget.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
-import 'package:railway_alert/helper/snackbar_helper.dart';
-import 'package:railway_alert/widgets/button_widget.dart';
+import 'package:rapid_response/bloc_cubits/reg_cubit/reg_cubit.dart';
+import 'package:rapid_response/bloc_cubits/reg_cubit/reg_state.dart';
+import 'package:rapid_response/localization/app_localization.dart';
+import 'package:rapid_response/network/network.dart';
+import 'package:rapid_response/utils/age_data.dart';
+import 'package:rapid_response/widgets/dropdown_widget.dart';
+import 'package:rapid_response/widgets/input_field_widget.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
+import 'package:rapid_response/widgets/button_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:railway_alert/helper/dialog.helper.dart';
-import 'package:railway_alert/widgets/logo_widget.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
-import 'package:railway_alert/widgets/text_widget.dart';
+import 'package:rapid_response/helper/dialog.helper.dart';
+import 'package:rapid_response/widgets/logo_widget.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
+import 'package:rapid_response/widgets/text_widget.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
@@ -304,7 +303,6 @@ class _RegScreenState extends State<RegScreen> {
                         onChanged: (value) async {
                           setState(() {
                             showValue = value!;
-                            print("object $showValue");
                           });
                         },
                       ),

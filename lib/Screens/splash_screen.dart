@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:railway_alert/widgets/logo_widget.dart';
+import 'package:rapid_response/widgets/logo_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

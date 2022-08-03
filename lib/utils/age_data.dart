@@ -1,4 +1,4 @@
-import 'package:railway_alert/localization/app_localization.dart';
+import 'package:rapid_response/localization/app_localization.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 Map<String, dynamic> ageData = {

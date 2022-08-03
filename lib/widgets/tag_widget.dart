@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:railway_alert/theme/app_colors.dart' as colors;
-import 'package:railway_alert/widgets/text_widget.dart';
+import 'package:rapid_response/theme/app_colors.dart' as colors;
+import 'package:rapid_response/widgets/text_widget.dart';
 
 class TagWidget extends StatefulWidget {
   final String? label;

@@ -1,7 +1,7 @@
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
-import 'package:railway_alert/helper/dialog.helper.dart';
+import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
+import 'package:rapid_response/helper/dialog.helper.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';
 

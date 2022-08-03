@@ -1,7 +1,7 @@
-import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
-import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
+import 'package:rapid_response/theme/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class SMSInbox extends StatefulWidget {
   const SMSInbox({Key? key}) : super(key: key);
@@ -34,7 +34,8 @@ class _SMSInboxState extends State<SMSInbox> {
               await Future.delayed(Duration(milliseconds: 1000));
               fetchSMS();
             },
-            child: ListView.separated(
+            child: _messages.length>0?
+            ListView.separated(
                 separatorBuilder: (context, index) => const Divider(
                       color: Colors.black,
                     ),
@@ -45,7 +46,7 @@ class _SMSInboxState extends State<SMSInbox> {
                     title: Text('${message.sender} [${message.date}]'),
                     subtitle: Text('${message.body}'),
                   );
-                }),
+                }):Center(child: Text("Data Not Found")),
           );
         },
       ),

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:railway_alert/models/address_resp_model.dart';
+import 'package:rapid_response/models/address_resp_model.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
-import 'package:railway_alert/models/station_location_by_id_resp.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
+import 'package:rapid_response/models/station_location_by_id_resp.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
 
 class DetailWidgetScreen extends StatefulWidget {
   DetailWidgetScreen({Key? key, this.countData, this.stationLocationByIdResp})
@@ -89,13 +89,14 @@ class _DetailWidgetScreenState extends State<DetailWidgetScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Attendance : ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const Text("Attendance : ",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             Text(
                 SecStore.getValue(
                             keyVal: SharedPreferencesConstant.ISPRESENT) ==
                         "true"
-                    ? "Present"
-                    : "Absent",
+                    ? "Available"
+                    : "Unavailable",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -135,8 +136,8 @@ class _DetailWidgetScreenState extends State<DetailWidgetScreen> {
             : Text(
                 "0 Km",
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               )
       ]),
     );

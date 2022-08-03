@@ -1,10 +1,10 @@
-import 'package:railway_alert/bloc_cubits/login_cubit/login_cubit.dart';
-import 'package:railway_alert/controllers/MenuController.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
+import 'package:rapid_response/bloc_cubits/login_cubit/login_cubit.dart';
+import 'package:rapid_response/controllers/MenuController.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:railway_alert/theme/app_colors.dart';
-import 'package:railway_alert/PlatformService.dart';
+import 'package:rapid_response/theme/app_colors.dart';
+import 'package:rapid_response/PlatformService.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';

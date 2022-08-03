@@ -1,12 +1,12 @@
-import 'package:railway_alert/bloc_cubits/theme_cubit/theme_cubit.dart';
-import 'package:railway_alert/localization/app_localization.dart';
-import 'package:railway_alert/models/lang_status_model.dart';
-import 'package:railway_alert/widgets/card_view_widget.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
+import 'package:rapid_response/bloc_cubits/theme_cubit/theme_cubit.dart';
+import 'package:rapid_response/localization/app_localization.dart';
+import 'package:rapid_response/models/lang_status_model.dart';
+import 'package:rapid_response/widgets/card_view_widget.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LangCard extends StatelessWidget {

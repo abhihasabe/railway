@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 
 class MyRadioOption<T> extends StatelessWidget {
   final T value;

@@ -1,5 +1,5 @@
-import 'package:railway_alert/validations/email_validation.dart';
-import 'package:railway_alert/validations/password_validation.dart';
+import 'package:rapid_response/validations/email_validation.dart';
+import 'package:rapid_response/validations/password_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 

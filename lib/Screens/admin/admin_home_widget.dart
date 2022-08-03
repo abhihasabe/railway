@@ -1,12 +1,12 @@
 import 'package:flutter_sms/flutter_sms.dart';
-import 'package:railway_alert/bloc_cubits/home_cubit/home_cubit.dart';
-import 'package:railway_alert/helper/dialog.helper.dart';
-import 'package:railway_alert/network/network.dart';
-import 'package:railway_alert/routes/app_routes_names.dart';
-import 'package:railway_alert/widgets/button_widget.dart';
-import 'package:railway_alert/models/emp_resp_model.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/bloc_cubits/home_cubit/home_cubit.dart';
+import 'package:rapid_response/helper/dialog.helper.dart';
+import 'package:rapid_response/network/network.dart';
+import 'package:rapid_response/routes/app_routes_names.dart';
+import 'package:rapid_response/widgets/button_widget.dart';
+import 'package:rapid_response/models/emp_resp_model.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/cupertino.dart';
@@ -59,10 +59,19 @@ class _AdminWidgetState extends State<AdminWidget> {
                               );
                             },
                           ),
-                          title: Text(
-                            widget.empData![index].name!,
-                            style:
-                                const TextStyle(color: textColor, fontSize: 16),
+                          title: InkWell(
+                            child: Text(
+                              widget.empData![index].name!,
+                              style: const TextStyle(
+                                  color: textColor, fontSize: 16),
+                            ),
+                            onTap: () {
+                              VxNavigator.of(context).push(Uri(
+                                  path: adminDetailScreen,
+                                  queryParameters: {
+                                    "id": widget.empData![index].id!.toString()
+                                  }));
+                            },
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,

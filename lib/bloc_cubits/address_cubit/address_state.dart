@@ -1,4 +1,4 @@
-import 'package:railway_alert/validations/field_validation.dart';
+import 'package:rapid_response/validations/field_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 

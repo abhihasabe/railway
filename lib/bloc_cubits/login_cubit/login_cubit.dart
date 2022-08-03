@@ -1,10 +1,10 @@
-import 'package:railway_alert/theme/app_shared_preferences_constant.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/bloc_cubits/login_cubit/login_state.dart';
-import 'package:railway_alert/validations/password_validation.dart';
-import 'package:railway_alert/validations/email_validation.dart';
-import 'package:railway_alert/repository/auth_repository.dart';
-import 'package:railway_alert/models/login_rep_model.dart';
+import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/bloc_cubits/login_cubit/login_state.dart';
+import 'package:rapid_response/validations/password_validation.dart';
+import 'package:rapid_response/validations/email_validation.dart';
+import 'package:rapid_response/repository/auth_repository.dart';
+import 'package:rapid_response/models/login_rep_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 

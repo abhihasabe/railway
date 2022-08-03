@@ -1,9 +1,9 @@
-import 'package:railway_alert/screens/localization_screen/lang_card_widget.dart';
-import 'package:railway_alert/localization/app_localization.dart';
-import 'package:railway_alert/models/lang_status_model.dart';
-import 'package:railway_alert/widgets/toolbar_widget.dart';
-import 'package:railway_alert/theme/app_dimension.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/screens/localization_screen/lang_card_widget.dart';
+import 'package:rapid_response/localization/app_localization.dart';
+import 'package:rapid_response/models/lang_status_model.dart';
+import 'package:rapid_response/widgets/toolbar_widget.dart';
+import 'package:rapid_response/theme/app_dimension.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LangScreen extends StatefulWidget {

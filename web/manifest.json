@@ -1,6 +1,6 @@
 {
-    "name": "railway_alert",
-    "short_name": "railway_alert",
+    "name": "rapid_response",
+    "short_name": "rapid_response",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

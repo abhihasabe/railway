@@ -1,7 +1,7 @@
-import 'package:railway_alert/bloc_cubits/theme_cubit/theme_state.dart';
-import 'package:railway_alert/repository/lang_repository.dart';
+import 'package:rapid_response/bloc_cubits/theme_cubit/theme_state.dart';
+import 'package:rapid_response/repository/lang_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:railway_alert/theme/app_theme.dart';
+import 'package:rapid_response/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 

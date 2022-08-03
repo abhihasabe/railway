@@ -1,9 +1,9 @@
 import 'package:formz/formz.dart';
-import 'package:railway_alert/bloc_cubits/address_cubit/address_state.dart';
+import 'package:rapid_response/bloc_cubits/address_cubit/address_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:railway_alert/models/add_address_req_model.dart';
-import 'package:railway_alert/repository/address_repository.dart';
-import 'package:railway_alert/validations/field_validation.dart';
+import 'package:rapid_response/models/add_address_req_model.dart';
+import 'package:rapid_response/repository/address_repository.dart';
+import 'package:rapid_response/validations/field_validation.dart';
 
 class AddressCubit extends Cubit<AddressState> {
   AddressCubit(this._addressRepository) : super(const AddressState());
@@ -43,7 +43,6 @@ class AddressCubit extends Cubit<AddressState> {
   }
 
   Future addAddress(String latitude, String longitude, String time, id) async {
-    print("addressResp $latitude");
     AddAddressReq addressResp = AddAddressReq(
         latitude: latitude,
         longitude: longitude,

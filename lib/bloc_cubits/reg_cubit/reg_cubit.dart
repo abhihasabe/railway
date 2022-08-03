@@ -1,16 +1,16 @@
-import 'package:railway_alert/models/dept_resp_model.dart';
-import 'package:railway_alert/models/reg_resp_model.dart';
-import 'package:railway_alert/validations/confirm_password_validation.dart';
-import 'package:railway_alert/validations/number_validation_dart.dart';
-import 'package:railway_alert/bloc_cubits/reg_cubit/reg_state.dart';
-import 'package:railway_alert/validations/password_validation.dart';
-import 'package:railway_alert/validations/email_validation.dart';
-import 'package:railway_alert/validations/field_validation.dart';
-import 'package:railway_alert/validations/name_validation.dart';
-import 'package:railway_alert/repository/auth_repository.dart';
-import 'package:railway_alert/validations/dob_validation.dart';
+import 'package:rapid_response/models/dept_resp_model.dart';
+import 'package:rapid_response/models/reg_resp_model.dart';
+import 'package:rapid_response/validations/confirm_password_validation.dart';
+import 'package:rapid_response/validations/number_validation_dart.dart';
+import 'package:rapid_response/bloc_cubits/reg_cubit/reg_state.dart';
+import 'package:rapid_response/validations/password_validation.dart';
+import 'package:rapid_response/validations/email_validation.dart';
+import 'package:rapid_response/validations/field_validation.dart';
+import 'package:rapid_response/validations/name_validation.dart';
+import 'package:rapid_response/repository/auth_repository.dart';
+import 'package:rapid_response/validations/dob_validation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:railway_alert/models/reg_req_model.dart';
+import 'package:rapid_response/models/reg_req_model.dart';
 import 'package:formz/formz.dart';
 
 class RegCubit extends Cubit<RegState> {

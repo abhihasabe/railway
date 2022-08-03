@@ -1,5 +1,5 @@
-import 'package:railway_alert/widgets/text_widget.dart';
-import 'package:railway_alert/theme/app_colors.dart';
+import 'package:rapid_response/widgets/text_widget.dart';
+import 'package:rapid_response/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'logo_widget.dart';
 

@@ -1,9 +1,9 @@
-import 'package:railway_alert/models/address_resp_model.dart';
-import 'package:railway_alert/models/station_location_by_id_resp.dart';
-import 'package:railway_alert/storage/cache/secure_storage_helper.dart';
-import 'package:railway_alert/bloc_cubits/home_cubit/home_state.dart';
-import 'package:railway_alert/repository/home_repository.dart';
-import 'package:railway_alert/models/emp_resp_model.dart';
+import 'package:rapid_response/models/address_resp_model.dart';
+import 'package:rapid_response/models/station_location_by_id_resp.dart';
+import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
+import 'package:rapid_response/bloc_cubits/home_cubit/home_state.dart';
+import 'package:rapid_response/repository/home_repository.dart';
+import 'package:rapid_response/models/emp_resp_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeCubit extends Cubit<HomeState> {

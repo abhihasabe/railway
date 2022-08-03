@@ -1,5 +1,5 @@
-import 'package:railway_alert/theme/app_network_constants.dart';
-import 'package:railway_alert/network/api_calls.dart';
+import 'package:rapid_response/theme/app_network_constants.dart';
+import 'package:rapid_response/network/api_calls.dart';
 
 class HomeRepository {
   dynamic resp;
@@ -38,7 +38,6 @@ class HomeRepository {
 
   Future getStationLocationById(value) async {
     resp = APIManager.getAPICall("$DEPT_ID_URL/$value");
-    print("resp $resp");
     return resp;
   }
 }

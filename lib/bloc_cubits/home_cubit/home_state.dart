@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:railway_alert/models/address_resp_model.dart';
-import 'package:railway_alert/models/emp_resp_model.dart';
+import 'package:rapid_response/models/address_resp_model.dart';
+import 'package:rapid_response/models/emp_resp_model.dart';
 
 abstract class HomeState extends Equatable {
   final String? message;

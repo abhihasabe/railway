@@ -1,10 +1,10 @@
-import 'package:railway_alert/validations/confirm_password_validation.dart';
-import 'package:railway_alert/validations/dob_validation.dart';
-import 'package:railway_alert/validations/field_validation.dart';
-import 'package:railway_alert/validations/number_validation_dart.dart';
-import 'package:railway_alert/validations/password_validation.dart';
-import 'package:railway_alert/validations/email_validation.dart';
-import 'package:railway_alert/validations/name_validation.dart';
+import 'package:rapid_response/validations/confirm_password_validation.dart';
+import 'package:rapid_response/validations/dob_validation.dart';
+import 'package:rapid_response/validations/field_validation.dart';
+import 'package:rapid_response/validations/number_validation_dart.dart';
+import 'package:rapid_response/validations/password_validation.dart';
+import 'package:rapid_response/validations/email_validation.dart';
+import 'package:rapid_response/validations/name_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 

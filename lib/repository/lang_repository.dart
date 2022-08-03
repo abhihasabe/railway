@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:railway_alert/models/lang_model.dart';
+import 'package:rapid_response/models/lang_model.dart';
 
 class LangRepository {
   late Box<Langs> _lang;
