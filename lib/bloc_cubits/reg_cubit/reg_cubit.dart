@@ -1,5 +1,8 @@
 import 'package:rapid_response/models/dept_resp_model.dart';
+import 'package:rapid_response/models/division_resp.dart';
+import 'package:rapid_response/models/railway_resp_model.dart';
 import 'package:rapid_response/models/reg_resp_model.dart';
+import 'package:rapid_response/models/zone_resp.dart';
 import 'package:rapid_response/validations/confirm_password_validation.dart';
 import 'package:rapid_response/validations/number_validation_dart.dart';
 import 'package:rapid_response/bloc_cubits/reg_cubit/reg_state.dart';
@@ -59,6 +62,30 @@ class RegCubit extends Cubit<RegState> {
     ));
   }
 
+  void railwayChanged(int value) {
+    final railway = Field.dirty(value.toString());
+    emit(state.copyWith(
+      railway: railway,
+      status: Formz.validate([railway, state.email, state.password]),
+    ));
+  }
+
+  void zoneChanged(int value) {
+    final zone = Field.dirty(value.toString());
+    emit(state.copyWith(
+      zone: zone,
+      status: Formz.validate([zone, state.email, state.password]),
+    ));
+  }
+
+  void divisionChanged(int value) {
+    final division = Field.dirty(value.toString());
+    emit(state.copyWith(
+      division: division,
+      status: Formz.validate([division, state.email, state.password]),
+    ));
+  }
+
   void deptChanged(int value) {
     final dept = Field.dirty(value.toString());
     emit(state.copyWith(
@@ -103,6 +130,7 @@ class RegCubit extends Cubit<RegState> {
       userType: int.parse(state.userType.value),
       activation: state.userType.value == 0 ? 1 : 0,
     );
+
     _authRepository.userRegistrationUser(userModel).then((value) {
       RegRespModel resRespModel = RegRespModel.fromJson(value);
       if (resRespModel != null && resRespModel.success == 0) {
@@ -115,8 +143,32 @@ class RegCubit extends Cubit<RegState> {
     });
   }
 
-  Future<List<DeptData>> getDeptType() async =>
-      _authRepository.fetchDeptTypeData().then((value) {
+  Future<List<RailwayData>> getRailwayType() async =>
+      _authRepository.fetchRailwayData().then((value) {
+        RailwayResp railwayResp = RailwayResp.fromJson(value);
+        List<RailwayData> listCompanyData =
+            List<RailwayData>.from(railwayResp.data!);
+        return listCompanyData;
+      });
+
+  Future<List<ZoneData>> getZoneType(selectedId) async =>
+      _authRepository.fetchZoneData(selectedId).then((value) {
+        ZoneResp zoneResp = ZoneResp.fromJson(value);
+        List<ZoneData> listCompanyData =
+            List<ZoneData>.from(zoneResp.data!);
+        return listCompanyData;
+      });
+
+  Future<List<DivisionData>> getDivision(selectedId) async =>
+      _authRepository.fetchDivisionData(selectedId).then((value) {
+        DivisionResp zoneResp = DivisionResp.fromJson(value);
+        List<DivisionData> listCompanyData =
+            List<DivisionData>.from(zoneResp.data!);
+        return listCompanyData;
+      });
+
+  Future<List<DeptData>> getDeptType(selectedId) async =>
+      _authRepository.fetchDeptTypeData(selectedId).then((value) {
         DeptResp companyTypesResp = DeptResp.fromJson(value);
         List<DeptData> listCompanyData =
             List<DeptData>.from(companyTypesResp.data!);

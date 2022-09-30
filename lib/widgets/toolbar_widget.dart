@@ -29,7 +29,7 @@ class ToolbarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    var brightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
         .platformBrightness;
     return AppBar(
         backgroundColor:

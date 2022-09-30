@@ -2,7 +2,6 @@ import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
 import 'package:rapid_response/bloc_cubits/login_cubit/login_cubit.dart';
 import 'package:rapid_response/bloc_cubits/login_cubit/login_state.dart';
 import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
-import 'package:rapid_response/localization/app_localization.dart';
 import 'package:rapid_response/widgets/input_field_widget.dart';
 import 'package:rapid_response/routes/app_routes_names.dart';
 import 'package:rapid_response/widgets/button_widget.dart';
@@ -38,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
         .platformBrightness;
   }
 
@@ -96,12 +95,34 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  _buildForgotPassword() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        InkWell(
+          onTap: () {
+            VxNavigator.of(context).push(Uri.parse(forgetPasswordScreen));
+          },
+          child: TextWidget(
+            text: "FORGOT YOUR PASSWORD?",
+            small: true,
+            bold: true,
+            textColor: (brightness == Brightness.dark)
+                ? primaryDarkColor
+                : primaryColor,
+          ),
+        ),
+        SizedBox(width: 10)
+      ],
+    );
+  }
+
   _buildSignUpText() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextWidget(
-          text: AppLocalization.of(context)?.translate('dnhaa'),
+          text: "Don't have an account?",
           small: true,
           textColor:
               (brightness == Brightness.dark) ? textDarkColor : textColor,
@@ -112,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
             VxNavigator.of(context).push(Uri.parse(registerScreen));
           },
           child: TextWidget(
-            text: AppLocalization.of(context)?.translate('signup'),
+            text: "SIGN UP",
             small: true,
             bold: true,
             textColor: (brightness == Brightness.dark)
@@ -127,11 +148,10 @@ class _LoginScreenState extends State<LoginScreen> {
   _buildTitleWidget() {
     return TextWidget(
       key: const Key("titleKey"),
-      text: AppLocalization.of(context)?.translate('signin'),
+      text: "SIGN IN",
       big: true,
       bold: true,
-      textColor:
-          (brightness == Brightness.dark) ? primaryDarkColor : primaryColor,
+      textColor: primaryColor,
     );
   }
 
@@ -142,46 +162,45 @@ class _LoginScreenState extends State<LoginScreen> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.47,
-            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.41,
+            width: MediaQuery.of(context).size.width * 0.9,
             decoration: const BoxDecoration(
               color: Colors.white,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(22.0),
+              padding: const EdgeInsets.all(18.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(height: DIMENSION_10),
                     _buildTitleWidget(),
-                    const SizedBox(height: DIMENSION_30),
+                    const SizedBox(height: DIMENSION_20),
                     InputTextFormFieldWidget(
                       key: const Key("emailKey"),
                       maxLine: ONE,
                       controller: _emailController,
-                      hintText: AppLocalization.of(context)?.translate('email'),
+                      hintText: "Phone No*",
                       textCapitalization: TextCapitalization.sentences,
                       textInputType: TextInputType.emailAddress,
                       actionKeyboard: TextInputAction.next,
                       prefixIcon: const Icon(
-                        Icons.email,
+                        Icons.phone_android,
                         color: hoverColorDarkColor,
                       ),
-                      errorMessage: state.email.invalid
-                          ? AppLocalization.of(context)?.translate('peveid')
+                      errorMessage: state.number.invalid
+                          ? "Please Enter Phone Number."
                           : null,
                       onChange: (name) =>
-                          context.read<LoginCubit>().emailChanged(name),
-                      parametersValidate:
-                          AppLocalization.of(context)?.translate('peeid'),
+                          context.read<LoginCubit>().mobileChanged(name),
+                      parametersValidate: "Please Enter Phone Number.",
                     ),
                     const SizedBox(height: DIMENSION_12),
                     InputTextFormFieldWidget(
                       key: const Key("passwordKey"),
                       controller: _passwordController,
-                      hintText:
-                          AppLocalization.of(context)?.translate('password'),
+                      hintText: "Password*",
                       textCapitalization: TextCapitalization.sentences,
                       textInputType: TextInputType.text,
                       actionKeyboard: TextInputAction.done,
@@ -193,18 +212,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon:
                           const Icon(Icons.lock, color: hoverColorDarkColor),
                       errorMessage: state.password.invalid
-                          ? AppLocalization.of(context)?.translate('pepass')
+                          ? "Please Enter Password"
                           : null,
                       onChange: (name) =>
                           context.read<LoginCubit>().passwordChanged(name),
-                      parametersValidate:
-                          AppLocalization.of(context)?.translate('pepass'),
+                      parametersValidate: "Please Enter Password",
                     ),
-                    const SizedBox(height: DIMENSION_25),
+                    const SizedBox(height: DIMENSION_32),
+                    _buildForgotPassword(),
+                    const SizedBox(height: DIMENSION_8),
                     ButtonWidget(
                       key: const Key("buttonKey"),
                       width: double.infinity,
-                      title: AppLocalization.of(context)?.translate('signin'),
+                      title: "SIGN IN",
                       height: DIMENSION_42,
                       bTitleBold: true,
                       bgColor: (brightness == Brightness.dark)
@@ -226,8 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Network().check().then((intenet) {
                                 if (intenet != null && intenet) {
                                   context.read<LoginCubit>().userLogin();
-                                }
-                                else {
+                                } else {
                                   showToast(
                                     "Please Check Internet Connection",
                                     duration: const Duration(seconds: 3),
@@ -286,7 +305,7 @@ class _LoginScreenState extends State<LoginScreen> {
             DialogHelper.showToasts(
                 "Please contact with super admin for activate your Account");
             DialogHelper.dismissDialog(context);
-          } else if (userId == "0" && depValue == deptId) {
+          } else if (userId == "0") {
             SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
                 .then((value) {
               VxNavigator.of(context)

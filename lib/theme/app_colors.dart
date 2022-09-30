@@ -37,7 +37,7 @@ const Color appBarIconColor = primaryColor;
 const Color appBarIconDarkColor = primaryDarkColor;
 const Color backgroundColor = Color(0xffe7e7e9);
 
-const Color backgroundDarkColor = Color(0xFF393838);
+const Color backgroundDarkColor = Color(0xFF4E4E4E);
 const Color scaffoldBackgroundColor = Color(0xffF1F5FB);
 
 const Color scaffoldBackgroundDarkColor = Colors.black;
@@ -77,7 +77,7 @@ const Color hintDarkColor = Colors.grey;
 const Color cursorColor = primaryDarkColor;
 
 const Color cursorDarkColor = primaryColor;
-const Color labelColor = Colors.black;
+const Color labelColor = Colors.black87;
 
 const Color labelDarkColor = Colors.white;
 const Color enableBorderColor = Colors.black12;

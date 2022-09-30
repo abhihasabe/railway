@@ -1,7 +1,4 @@
-import 'package:oktoast/oktoast.dart';
-import 'package:rapid_response/Screens/Admin/admin_home_widget.dart';
 import 'package:rapid_response/Screens/super_admin/super_admin_home_widget.dart';
-import 'package:rapid_response/network/network.dart';
 import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
 import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
 import 'package:rapid_response/bloc_cubits/login_cubit/login_cubit.dart';
@@ -10,9 +7,11 @@ import 'package:rapid_response/bloc_cubits/home_cubit/home_state.dart';
 import 'package:rapid_response/routes/app_routes_names.dart';
 import 'package:rapid_response/helper/dialog.helper.dart';
 import 'package:rapid_response/theme/app_colors.dart';
+import 'package:rapid_response/network/network.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 
 class SuperAdminHomeScreen extends StatefulWidget {
   const SuperAdminHomeScreen({Key? key}) : super(key: key);
@@ -22,10 +21,13 @@ class SuperAdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<SuperAdminHomeScreen> {
+  var appTitle = "SUPER ADMIN";
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getUserName();
     Network().check().then((intenet) {
       if (intenet != null && intenet) {
         getUserData();
@@ -39,6 +41,15 @@ class _AdminHomeScreenState extends State<SuperAdminHomeScreen> {
           textStyle: const TextStyle(fontSize: 14.0),
         );
       }
+    });
+  }
+
+  getUserName() async {
+    await SecStore.getValue(keyVal: SharedPreferencesConstant.USERNAME)
+        .then((value) {
+      setState(() {
+        appTitle = value;
+      });
     });
   }
 
@@ -57,9 +68,15 @@ class _AdminHomeScreenState extends State<SuperAdminHomeScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
         leading:
-            const Icon(Icons.account_circle, color: Colors.white, size: 32),
-        title: const Text(
-          "HOME",
+        IconButton(
+            icon: Icon(Icons.account_circle),
+            color: Colors.white,
+            iconSize: 32,
+            onPressed: () {
+              VxNavigator.of(context).push(Uri.parse(userProfileScreen));
+            }),
+        title: Text(
+          appTitle,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[

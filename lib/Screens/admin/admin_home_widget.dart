@@ -30,7 +30,7 @@ class _AdminWidgetState extends State<AdminWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
         .platformBrightness;
     isChecked = List.generate(widget.empData!.length, (index) => false);
   }
@@ -272,12 +272,10 @@ class _AdminWidgetState extends State<AdminWidget> {
     if (selected == true) {
       setState(() {
         userChecked.add(empData.phone!);
-        print("userChecked $userChecked");
       });
     } else {
       setState(() {
         userChecked.remove(empData.phone!);
-        print("userChecked $userChecked");
       });
     }
   }
@@ -287,7 +285,6 @@ class _AdminWidgetState extends State<AdminWidget> {
         .catchError((onError) {
       print(onError);
     });
-    print(_result);
   }
 
   void _sendOnlineSMS(String message, List<String> recipents) async {
@@ -298,7 +295,6 @@ class _AdminWidgetState extends State<AdminWidget> {
       setState(() {});
       DialogHelper.showToasts("SMS Send Successfully");
       VxNavigator.of(context).push(Uri.parse(adminHomeScreen));
-      print("SMSResp  $value");
     });
   }
 }

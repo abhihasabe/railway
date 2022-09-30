@@ -78,7 +78,7 @@ class AppThemes {
     colorScheme: const ColorScheme.light(),
   );
 
-  static Brightness get currentSystemBrightness => SchedulerBinding.instance!.window.platformBrightness;
+  static Brightness get currentSystemBrightness => SchedulerBinding.instance.window.platformBrightness;
 
   static TextTheme _customTextTheme(TextTheme base, Color color, String theme) {
     return base

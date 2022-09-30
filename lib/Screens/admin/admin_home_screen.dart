@@ -22,11 +22,23 @@ class AdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
+  var appTitle = "ADMIN";
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getUserName();
     getUserData();
+  }
+
+  getUserName() async {
+    await SecStore.getValue(keyVal: SharedPreferencesConstant.USERNAME)
+        .then((value) {
+      setState(() {
+        appTitle = value;
+      });
+    });
   }
 
   getUserData() {
@@ -57,10 +69,15 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         centerTitle: false,
         automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
-        leading:
-            const Icon(Icons.account_circle, color: Colors.white, size: 32),
-        title: const Text(
-          "HOME",
+        leading: IconButton(
+            icon: Icon(Icons.account_circle),
+            color: Colors.white,
+            iconSize: 32,
+            onPressed: () {
+              VxNavigator.of(context).push(Uri.parse(userProfileScreen));
+            }),
+        title: Text(
+          appTitle,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[

@@ -48,16 +48,14 @@ class _DetailWidgetScreenState extends State<DetailWidgetScreen> {
       address =
           "${name}, ${subLocality}, ${locality}, ${administrativeArea} ${postalCode}, ${country}";
     });
-
     if (widget.stationLocationByIdResp != null && widget.countData != null) {
       distance = Geolocator.distanceBetween(
-          double.parse(widget.stationLocationByIdResp![0].deptLocationLat!),
-          double.parse(widget.stationLocationByIdResp![0].deptLocationLong!),
-          double.parse(
+          double?.parse(widget.stationLocationByIdResp![0].deptLocationLat!),
+          double?.parse(widget.stationLocationByIdResp![0].deptLocationLong!),
+          double?.parse(
               widget.countData![widget.countData!.length - 1].latitude!),
-          double.parse(
+          double?.parse(
               widget.countData![widget.countData!.length - 1].longitude!));
-
       setState(() {
         distance;
       });
@@ -66,12 +64,11 @@ class _DetailWidgetScreenState extends State<DetailWidgetScreen> {
 
       if (widget.countData![widget.countData!.length - 1].time
                   ?.substring(0, 10)
-                  ?.contains(formattedDate) ==
+                  .contains(formattedDate) ==
               true &&
-          distance! <= 100.0 &&
-          SecStore.getValue(keyVal: SharedPreferencesConstant.ISPRESENT) ==
-              "") {
+          distance! <= 100.0) {
         setState(() {
+          isPresent = true;
           SecStore.setValue(
               keyVal: SharedPreferencesConstant.ISPRESENT, value: "true");
         });
@@ -81,65 +78,70 @@ class _DetailWidgetScreenState extends State<DetailWidgetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        const SizedBox(height: 30),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Attendance : ",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            Text(
-                SecStore.getValue(
-                            keyVal: SharedPreferencesConstant.ISPRESENT) ==
-                        "true"
-                    ? "Available"
-                    : "Unavailable",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: SecStore.getValue(
-                                keyVal: SharedPreferencesConstant.ISPRESENT) ==
-                            "true"
-                        ? Colors.green
-                        : Colors.red)),
-          ],
-        ),
-        const SizedBox(height: 30),
-        const Text("Employee Current Location :",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 10),
-        Text(
-          address != null ? "$address" : "Data Not Found",
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        Text(
-          "Employee Current Location in KM : ",
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        distance != null
-            ? Text(
-                "${(distance! / 1000).toStringAsFixed(2)} Km",
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16),
-              )
-            : Text(
-                "0 Km",
-                textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              )
-      ]),
-    );
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(height: 30),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("Attendance : ",
+                  style:
+                      TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              Text(isPresent == true ? "Available" : "Unavailable",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: isPresent == true ? Colors.green : Colors.red)),
+            ],
+          ),
+          const SizedBox(height: 30),
+          Text(
+            "Attendance Date & Time : ",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          widget.countData!.length > 0
+              ? Text(
+                  "${widget.countData?[widget.countData!.length - 1].time}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
+                )
+              : Text("Data Not Found", style: const TextStyle(fontSize: 16)),
+          const SizedBox(height: 30),
+          const Text("Employee Current Location :",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          Text(
+            address != null ? "$address" : "Data Not Found",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 16),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "Employee Current Location in KM : ",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          distance != null
+              ? Text(
+                  "${(distance! / 1000).toStringAsFixed(2)} Km",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
+                )
+              : Text(
+                  "Data Not Found",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 16),
+                )
+        ]);
   }
 }

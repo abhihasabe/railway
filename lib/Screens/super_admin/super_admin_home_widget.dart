@@ -29,7 +29,7 @@ class _AdminWidgetState extends State<SuperAdminWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window)
         .platformBrightness;
     isChecked = List.generate(widget.empData!.length, (index) => false);
   }

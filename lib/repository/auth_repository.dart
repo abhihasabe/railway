@@ -6,7 +6,7 @@ class AuthRepository {
   dynamic resp;
 
   Future signInWithEmail(String userName, String password) async {
-    var loginJson = {"email": userName, "password": password};
+    var loginJson = {"phone": userName, "password": password};
     resp = APIManager.authAPICall(LOGIN_URL, loginJson);
     return resp;
   }
@@ -34,8 +34,23 @@ class AuthRepository {
     return resp;
   }
 
-  Future fetchDeptTypeData() async {
-    resp = APIManager.getAPICall(DEPT_URL);
+  Future fetchRailwayData() async {
+    resp = APIManager.getAPICall(RAILWAY_URL);
+    return resp;
+  }
+
+  Future fetchZoneData(selectedId) async {
+    resp = APIManager.getAPICall(ZONE_URL + "$selectedId");
+    return resp;
+  }
+
+  Future fetchDivisionData(selectedId) async {
+    resp = APIManager.getAPICall(DIVISION_URL + "$selectedId");
+    return resp;
+  }
+
+  Future fetchDeptTypeData(selectedId) async {
+    resp = APIManager.getAPICall(DEPT_URL + "$selectedId");
     return resp;
   }
 }

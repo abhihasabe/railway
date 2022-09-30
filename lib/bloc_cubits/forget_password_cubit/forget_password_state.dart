@@ -4,31 +4,36 @@ import 'package:rapid_response/validations/password_validation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
-class LoginState extends Equatable {
-  const LoginState({
+class ForgetPasswordState extends Equatable {
+  const ForgetPasswordState({
     this.number = const Number.pure(),
-    this.password = const Password.pure(),
+    this.nPassword = const Password.pure(),
+    this.nsPassword = const Password.pure(),
     this.status = FormzStatus.pure,
     this.exceptionError = "",
   });
 
   final Number number;
-  final Password password;
+  final Password nPassword;
+  final Password nsPassword;
   final FormzStatus status;
   final String exceptionError;
 
   @override
-  List<Object> get props => [number, password, status, exceptionError];
+  List<Object> get props =>
+      [number, nPassword, nsPassword, status, exceptionError];
 
-  LoginState copyWith({
+  ForgetPasswordState copyWith({
     Number? number,
-    Password? password,
+    Password? nPassword,
+    Password? nsPassword,
     FormzStatus? status,
     String? exceptionError,
   }) {
-    return LoginState(
+    return ForgetPasswordState(
       number: number ?? this.number,
-      password: password ?? this.password,
+      nPassword: nPassword ?? this.nPassword,
+      nsPassword: nsPassword ?? this.nsPassword,
       status: status ?? this.status,
       exceptionError: exceptionError ?? this.exceptionError,
     );

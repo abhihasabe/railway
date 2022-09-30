@@ -32,14 +32,17 @@ class StationLocationData {
   String? name;
   String? deptLocationLat;
   String? deptLocationLong;
+  int? dId;
 
-  StationLocationData({this.id, this.name, this.deptLocationLat, this.deptLocationLong});
+  StationLocationData(
+      {this.id, this.name, this.deptLocationLat, this.deptLocationLong});
 
   StationLocationData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     deptLocationLat = json['dept_location_lat'];
     deptLocationLong = json['dept_location_long'];
+    dId = json['dId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +51,7 @@ class StationLocationData {
     data['name'] = this.name;
     data['dept_location_lat'] = this.deptLocationLat;
     data['dept_location_long'] = this.deptLocationLong;
+    data['dId'] = this.dId;
     return data;
   }
 }

@@ -13,7 +13,6 @@ const String registerScreen = 'register';
 const String employeeScreen = 'employee';
 const String projectsScreen = 'projects';
 const String chooseLangScreen = 'lang';
-const String settingScreen = 'setting';
 const String splashScreen = 'splash';
 const String leaveScreen = 'leave';
 const String loginScreen = 'login';
@@ -22,7 +21,9 @@ const String initialScreen = '/';
 //HR
 
 const String superAdminHomeScreen = 'superAdminHome';
+const String forgetPasswordScreen = 'forgetPasswordScreen';
 const String adminHomeScreen = 'adminHome';
 const String empHomeScreen = 'employeeHome';
 const String adminDetailScreen = 'adminDetail';
 const String smsScreen = 'sms';
+const String userProfileScreen = 'userProfile';

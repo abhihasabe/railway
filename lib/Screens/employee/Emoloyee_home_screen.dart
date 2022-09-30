@@ -19,7 +19,6 @@ import 'dart:async';
 final assetsAudioPlayer = AssetsAudioPlayer();
 
 onBackgroundMessage(SmsMessage message) {
-  debugPrint("onBackgroundMessage called $message");
   callRing(message);
 }
 
@@ -56,19 +55,29 @@ class _AdminHomeScreenState extends State<EmployeeHomeScreen> {
   bool start = false;
   List<Placemark>? newPlace;
   bool isLoading = false;
+  var appTitle = "EMPLOYEE";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getUserName();
     initPlatformState();
     getData();
+  }
+
+  getUserName() async {
+    await SecStore.getValue(keyVal: SharedPreferencesConstant.USERNAME)
+        .then((value) {
+      setState(() {
+        appTitle = value;
+      });
+    });
   }
 
   setAddress() async {
     newPlace = await placemarkFromCoordinates(
         double.parse(latitude), double.parse(longitude));
-
     Placemark placeMark = newPlace![0];
     String? name = placeMark.name;
     String? subLocality = placeMark.subLocality;
@@ -114,15 +123,20 @@ class _AdminHomeScreenState extends State<EmployeeHomeScreen> {
         centerTitle: false,
         automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
-        leading:
-            const Icon(Icons.account_circle, color: Colors.white, size: 32),
-        title: const Text(
-          "EMPLOYEE",
+        leading: IconButton(
+            icon: Icon(Icons.account_circle),
+            color: Colors.white,
+            iconSize: 32,
+            onPressed: () {
+              VxNavigator.of(context).push(Uri.parse(userProfileScreen));
+            }),
+        title: Text(
+          appTitle,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
                 iconSize: 24,
                 onPressed: () {
@@ -153,103 +167,124 @@ class _AdminHomeScreenState extends State<EmployeeHomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 18.0),
-              child: Center(
-                child: ButtonWidget(
-                  key: const Key("buttonKey"),
-                  width: 210,
-                  height: DIMENSION_34,
-                  title: start == false ? "START" : "STOP",
-                  bgColor: start == false ? Colors.green : Colors.red,
-                  textColor: Colors.white,
-                  disabledBgColor: start == false ? Colors.green : Colors.red,
-                  disabledTextColor: Colors.white,
-                  bTitleSmaller: true,
-                  bTitleBold: true,
-                  borderRadius: DIMENSION_5,
-                  onClick: () async {
-                    await BackgroundLocation.setAndroidConfiguration(1000);
-                    await BackgroundLocation.startLocationService(
-                        distanceFilter: 0);
-                    BackgroundLocation.getLocationUpdates((location) {
-                      setState(() {
-                        latitude = location.latitude.toString();
-                        longitude = location.longitude.toString();
-                        time = DateTime.fromMillisecondsSinceEpoch(
-                                location.time!.toInt())
-                            .toString();
-                        DialogHelper.showLoaderDialog(context);
-                        isLoading = true;
-                        if (isLoading == true) {
-                          Navigator.pop(context);
-                          getLocation(latitude, longitude, time);
-                          setAddress();
-                          isLoading = false;
-                        }
-                        Timer.periodic(const Duration(seconds: 180), (Timer t) {
-                          if (latitude != null &&
-                              longitude != null &&
-                              time != null) {
-                            getLocation(latitude, longitude, time);
-                            setAddress();
-                          }
-                        });
-                      });
-                    });
-                    setState(() {
-                      start = true;
-                    });
-                  },
-                ),
-              ),
-            ),
-            address != null
-                ? Padding(
-                    padding:
-                        const EdgeInsets.only(top: 22.0, left: 12, right: 12),
-                    child: Text(
-                      "$address",
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-                : Container(),
-            Center(
+            Card(
+                elevation: 1,
                 child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                "Time : $time",
-                textAlign: TextAlign.center,
-              ),
-            )),
-            Padding(
-              padding: const EdgeInsets.only(right: 18.0),
-              child: Center(
-                child: ButtonWidget(
-                  key: const Key("buttonKey"),
-                  width: 210,
-                  height: DIMENSION_34,
-                  title: "SHOW RECEIVED SMS",
-                  bgColor: primaryColor,
-                  textColor: Colors.white,
-                  disabledBgColor: start == false ? Colors.green : Colors.red,
-                  disabledTextColor: Colors.white,
-                  bTitleSmaller: true,
-                  bTitleBold: true,
-                  borderRadius: DIMENSION_5,
-                  onClick: () async {
-                    VxNavigator.of(context).push(Uri.parse(smsScreen));
-                  },
-                ),
-              ),
-            ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 18.0),
+                      child: Center(
+                        child: ButtonWidget(
+                          key: const Key("buttonKey"),
+                          width: 210,
+                          height: DIMENSION_34,
+                          title: start == false
+                              ? "START LOCATION"
+                              : "STOP LOCATION",
+                          bgColor: start == false ? Colors.green : Colors.red,
+                          textColor: Colors.white,
+                          disabledBgColor:
+                              start == false ? Colors.green : Colors.red,
+                          disabledTextColor: Colors.white,
+                          bTitleSmaller: true,
+                          bTitleBold: true,
+                          borderRadius: DIMENSION_5,
+                          onClick: () async {
+                            if (start == false) {
+                              await BackgroundLocation.setAndroidConfiguration(
+                                  1000);
+                              await BackgroundLocation.startLocationService(
+                                  distanceFilter: 0);
+                              BackgroundLocation.getLocationUpdates((location) {
+                                setState(() {
+                                  latitude = location.latitude.toString();
+                                  longitude = location.longitude.toString();
+                                  time = DateTime.fromMillisecondsSinceEpoch(
+                                          location.time!.toInt())
+                                      .toString();
+                                  DialogHelper.showLoaderDialog(context);
+                                  isLoading = true;
+                                  if (isLoading == true) {
+                                    Navigator.pop(context);
+                                    setLocation(latitude, longitude, time);
+                                    setAddress();
+                                    isLoading = false;
+                                  }
+                                  Timer.periodic(const Duration(seconds: 180),
+                                      (Timer t) {
+                                    if (latitude != null &&
+                                        longitude != null &&
+                                        time != null) {
+                                      //getLocation(latitude, longitude, time);
+                                      setAddress();
+                                    }
+                                  });
+                                });
+                              });
+                            }
+                            setState(() {
+                              start == false ? start = true : start = false;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    address != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 22.0, left: 12, right: 12),
+                            child: Text(
+                              "$address",
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        : Container(),
+                    Center(
+                        child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        "Time : $time",
+                        textAlign: TextAlign.center,
+                      ),
+                    )),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 18.0),
+                      child: Center(
+                        child: ButtonWidget(
+                          key: const Key("buttonKey"),
+                          width: 210,
+                          height: DIMENSION_34,
+                          title: "SHOW RECEIVED SMS",
+                          bgColor: primaryColor,
+                          textColor: Colors.white,
+                          disabledBgColor:
+                              start == false ? Colors.green : Colors.red,
+                          disabledTextColor: Colors.white,
+                          bTitleSmaller: true,
+                          bTitleBold: true,
+                          borderRadius: DIMENSION_5,
+                          onClick: () async {
+                            VxNavigator.of(context).push(Uri.parse(smsScreen));
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ]),
+                )),
           ],
         ),
       ),
     );
   }
 
-  void getLocation(String latitude, String location, String time) {
+  void setLocation(String latitude, String location, String time) {
     if (latitude != null && longitude != null) {
       context.read<AddressCubit>().addAddress(latitude, longitude, time, empId);
     }

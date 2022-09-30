@@ -16,6 +16,9 @@ class RegState extends Equatable {
     this.dob = const DOB.pure(),
     this.location = const Field.pure(),
     this.userType = const Field.pure(),
+    this.railway = const Field.pure(),
+    this.zone = const Field.pure(),
+    this.division = const Field.pure(),
     this.dept = const Field.pure(),
     this.number = const Number.pure(),
     this.confirmPassword = const ConfirmPassword.pure(),
@@ -29,6 +32,9 @@ class RegState extends Equatable {
   final DOB dob;
   final Field location;
   final Field userType;
+  final Field railway;
+  final Field zone;
+  final Field division;
   final Field dept;
   final Password password;
   final ConfirmPassword confirmPassword;
@@ -43,6 +49,9 @@ class RegState extends Equatable {
         dob,
         location,
         userType,
+        railway,
+        zone,
+        division,
         dept,
         number,
         confirmPassword,
@@ -57,6 +66,9 @@ class RegState extends Equatable {
     DOB? dob,
     Field? location,
     Field? userType,
+    Field? railway,
+    Field? zone,
+    Field? division,
     Field? dept,
     Number? number,
     ConfirmPassword? confirmPassword,
@@ -69,6 +81,9 @@ class RegState extends Equatable {
       location: location ?? this.location,
       userType: userType ?? this.userType,
       email: email ?? this.email,
+      railway: railway ?? this.railway,
+      zone: zone ?? this.zone,
+      division: division ?? this.division,
       dept: dept ?? this.dept,
       number: number ?? this.number,
       password: password ?? this.password,

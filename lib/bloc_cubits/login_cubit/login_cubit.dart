@@ -1,6 +1,7 @@
 import 'package:rapid_response/theme/app_shared_preferences_constant.dart';
 import 'package:rapid_response/storage/cache/secure_storage_helper.dart';
 import 'package:rapid_response/bloc_cubits/login_cubit/login_state.dart';
+import 'package:rapid_response/validations/number_validation_dart.dart';
 import 'package:rapid_response/validations/password_validation.dart';
 import 'package:rapid_response/validations/email_validation.dart';
 import 'package:rapid_response/repository/auth_repository.dart';
@@ -13,11 +14,11 @@ class LoginCubit extends Cubit<LoginState> {
 
   final AuthRepository _authRepository;
 
-  void emailChanged(String value) {
-    final email = Email.dirty(value);
+  void mobileChanged(String value) {
+    final mobile = Number.dirty(value);
     emit(state.copyWith(
-      email: email,
-      status: Formz.validate([email, state.email, state.password]),
+      number: mobile,
+      status: Formz.validate([mobile, state.number, state.password]),
     ));
   }
 
@@ -25,7 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
     final password = Password.dirty(value);
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([password, state.email, state.password]),
+      status: Formz.validate([password, state.number, state.password]),
     ));
   }
 
@@ -38,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     _authRepository
-        .signInWithEmail(state.email.value, state.password.value)
+        .signInWithEmail(state.number.value, state.password.value)
         .then((loginResp) {
       LoginResp? result = LoginResp.fromJson(loginResp);
       if (result != null && result.success == 0) {
@@ -46,6 +47,11 @@ class LoginCubit extends Cubit<LoginState> {
             status: FormzStatus.submissionFailure,
             exceptionError: result.message));
       } else {
+        if (result.data != null) {
+          SecStore.setValue(
+              keyVal: SharedPreferencesConstant.USERPHONE,
+              value: result.data!.phone.toString());
+        }
         SecStore.setValue(
                 keyVal: SharedPreferencesConstant.EMPLOYEEID,
                 value: result.data!.id.toString())
@@ -66,7 +72,12 @@ class LoginCubit extends Cubit<LoginState> {
                         keyVal: SharedPreferencesConstant.USEREMAIL,
                         value: result.data!.email.toString())
                     .then((value) {
-                  emit(state.copyWith(status: FormzStatus.submissionSuccess));
+                  SecStore.setValue(
+                          keyVal: SharedPreferencesConstant.USERNAME,
+                          value: result.data!.name.toString())
+                      .then((value) {
+                    emit(state.copyWith(status: FormzStatus.submissionSuccess));
+                  });
                 });
               });
             });

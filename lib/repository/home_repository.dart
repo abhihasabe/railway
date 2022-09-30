@@ -10,7 +10,7 @@ class HomeRepository {
   }
 
   Future fetchAdminData(String value) async {
-    resp = APIManager.getAPICall("$GET_EMP_URL/${int.parse(value)}/1");
+    resp = APIManager.getAPICall("$GET_ADMIN_URL/1");
     return resp;
   }
 

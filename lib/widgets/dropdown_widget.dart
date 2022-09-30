@@ -12,7 +12,7 @@ class DropdownWidget extends StatelessWidget {
   final Function? onChoose;
   final Widget? prefixIcon;
   final String? label;
-  final List<String>? items;
+  final List? items;
   final String? errorMessage;
   final FocusNode? autofocus;
   final TextInputAction? actionKeyboard;
@@ -34,8 +34,6 @@ class DropdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
-    var brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-        .platformBrightness;
     List<Widget> options = [];
 
     if (value != null) _controller.text = value!;
@@ -74,8 +72,7 @@ class DropdownWidget extends StatelessWidget {
         controller: _controller,
         onChanged: (value) => null,
         enableInteractiveSelection: false,
-        cursorColor:
-            (brightness == Brightness.dark) ? cursorDarkColor : cursorColor,
+        cursorColor: cursorColor,
         onTap: () {
           ModalWidget.show(context,
               title: label == null ? "" : label!.toUpperCase(),
@@ -87,52 +84,32 @@ class DropdownWidget extends StatelessWidget {
         textCapitalization: TextCapitalization.none,
         readOnly: true,
         style: TextStyle(
-          color: (brightness == Brightness.dark) ? textDarkColor : textColor,
-          fontSize: 16.0,
-          fontWeight: FontWeight.w200,
-          fontStyle: FontStyle.normal,
-          letterSpacing: 1.2,
+          color: textColor,
+          fontSize: dimens.fontTitle,
+            fontWeight: FontWeight.normal
         ),
         decoration: InputDecoration(
           errorText: errorMessage,
           prefixIcon: prefixIcon,
           suffixIcon: IconButton(
-            icon: Icon(Icons.arrow_drop_down,
-                size: 18,
-                color: (brightness == Brightness.dark)
-                    ? hoverColorDarkColor
-                    : hoverColorDarkColor),
+            icon: Icon(Icons.arrow_drop_down, size: 18, color: hoverColor),
             onPressed: () {},
           ),
           label: Text(
             hintText!,
-            style: TextStyle(
-                color: (brightness == Brightness.dark)
-                    ? labelDarkColor
-                    : labelColor),
+            style: TextStyle(fontSize: 16, color: labelColor, fontWeight: FontWeight.normal),
           ),
           hintText: hintText ?? "",
           border: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: (brightness == Brightness.dark)
-                      ? enableBorderDarkColor
-                      : enableBorderColor)),
+              borderSide: BorderSide(color: enableBorderColor)),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: (brightness == Brightness.dark)
-                      ? enableBorderDarkColor
-                      : enableBorderColor)),
+              borderSide: BorderSide(color: enableBorderColor)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: (brightness == Brightness.dark)
-                      ? focusedBorderDarkColor
-                      : focusedBorderColor)),
+              borderSide: BorderSide(color: focusedBorderColor)),
           hintStyle: const TextStyle(
               fontSize: dimens.fontInputWidget,
               color: backgroundDarkColor,
-              fontWeight: FontWeight.w300,
-              fontStyle: FontStyle.normal,
-              letterSpacing: 1.2),
+              fontWeight: FontWeight.normal),
           isDense: true,
           contentPadding: const EdgeInsets.only(
               top: dimens.FONT_12,

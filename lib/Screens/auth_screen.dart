@@ -17,17 +17,24 @@ class Auth extends StatelessWidget {
           .then((userId) {
         SecStore.getValue(keyVal: SharedPreferencesConstant.ACTIVATION)
             .then((activation) {
-          if (userId == "2" && activation == "1" && depValue == deptId) {
-            VxNavigator.of(context).push(Uri.parse(empHomeScreen));
-          } else if (userId == "2" && activation == "0" && depValue == deptId) {
-            DialogHelper.showToasts(
-                "Please Contact With admin for activate your Account");
-            DialogHelper.dismissDialog(context);
-          } else if (depValue == deptId) {
+          if (userId == "0") {
+            VxNavigator.of(context)
+                .clearAndPush(Uri.parse(superAdminHomeScreen));
+          } else if (userId == "1" && activation == "1" && depValue == deptId) {
             SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
                 .then((value) {
-              VxNavigator.of(context).push(Uri.parse(adminHomeScreen));
+              VxNavigator.of(context).clearAndPush(Uri.parse(adminHomeScreen));
             });
+          } else if (userId == "1" && activation == "0" && depValue == deptId) {
+            DialogHelper.showToasts(
+                "Please contact with super admin for activate your Account");
+            DialogHelper.dismissDialog(context);
+          } else if (userId == "2" && activation == "1" && depValue == deptId) {
+            VxNavigator.of(context).clearAndPush(Uri.parse(empHomeScreen));
+          } else if (userId == "2" && activation == "0" && depValue == deptId) {
+            DialogHelper.showToasts(
+                "Please contact with admin for activate your Account");
+            DialogHelper.dismissDialog(context);
           }
         });
       });

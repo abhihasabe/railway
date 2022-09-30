@@ -60,15 +60,12 @@ class _InputTextFormFieldWidgetState extends State<InputTextFormFieldWidget> {
   double bottomPaddingToError = dimens.FONT_12;
   bool? _obSecure;
   int inputLength = 0;
-  var brightness;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _obSecure = widget.obscureText!;
-    brightness = MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
-        .platformBrightness;
   }
 
   @override
@@ -77,8 +74,7 @@ class _InputTextFormFieldWidgetState extends State<InputTextFormFieldWidget> {
       key: const Key('textField'),
       readOnly: widget.readOnly == null ? false : widget.readOnly!,
       autovalidateMode: widget.autoValidateMode,
-      cursorColor:
-          (brightness == Brightness.dark) ? cursorDarkColor : cursorColor,
+      cursorColor: cursorColor,
       obscureText: _obSecure!,
       textCapitalization: widget.textCapitalization!,
       keyboardType: widget.textInputType,
@@ -86,12 +82,9 @@ class _InputTextFormFieldWidgetState extends State<InputTextFormFieldWidget> {
       focusNode: widget.focusNode,
       maxLines: widget.maxLine,
       style: TextStyle(
-        color: (brightness == Brightness.dark) ? textDarkColor : textColor,
-        fontSize: 16.0,
-        fontWeight: FontWeight.w200,
-        fontStyle: FontStyle.normal,
-        letterSpacing: 1.2,
-      ),
+          color: textColor,
+          fontSize: dimens.fontTitle,
+          fontWeight: FontWeight.normal),
       initialValue: widget.defaultText,
       decoration: InputDecoration(
         errorText: widget.errorMessage,
@@ -104,48 +97,30 @@ class _InputTextFormFieldWidgetState extends State<InputTextFormFieldWidget> {
                         _obSecure = false;
                       });
                     },
-                    icon: Icon(Icons.visibility_off,
-                        size: 18,
-                        color: (brightness == Brightness.dark)
-                            ? hoverColorDarkColor
-                            : hoverColorDarkColor))
+                    icon:
+                        Icon(Icons.visibility_off, size: 18, color: hoverColor))
                 : IconButton(
                     onPressed: () {
                       setState(() {
                         _obSecure = true;
                       });
                     },
-                    icon: Icon(Icons.visibility,
-                        size: 18,
-                        color: (brightness == Brightness.dark)
-                            ? hoverColorDarkColor
-                            : hoverColorDarkColor)))
+                    icon: Icon(Icons.visibility, size: 18, color: hoverColor)))
             : null,
         label: Text(
           "${widget.hintText}",
           style: TextStyle(
-              color: (brightness == Brightness.dark)
-                  ? labelDarkColor
-                  : labelColor),
+              fontSize: dimens.fontInputWidget, color: labelColor, fontWeight: FontWeight.normal),
         ),
         hintText: widget.hintText,
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                color: (brightness == Brightness.dark)
-                    ? enableBorderDarkColor
-                    : enableBorderColor)),
+            borderSide: BorderSide(color: enableBorderColor)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                color: (brightness == Brightness.dark)
-                    ? focusedBorderDarkColor
-                    : focusedBorderColor)),
+            borderSide: BorderSide(color: focusedBorderColor)),
         hintStyle: const TextStyle(
-          color: backgroundDarkColor,
-          fontSize: dimens.fontInputWidget,
-          fontWeight: FontWeight.w300,
-          fontStyle: FontStyle.normal,
-          letterSpacing: 1.2,
-        ),
+            color: textColor,
+            fontSize: dimens.fontInputWidget,
+            fontWeight: FontWeight.normal),
         contentPadding: EdgeInsets.only(
             top: dimens.FONT_12,
             bottom: bottomPaddingToError,
@@ -155,9 +130,7 @@ class _InputTextFormFieldWidgetState extends State<InputTextFormFieldWidget> {
         errorStyle: const TextStyle(
           color: errorColor,
           fontSize: 12.0,
-          fontWeight: FontWeight.w300,
           fontStyle: FontStyle.normal,
-          letterSpacing: 1.2,
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: errorColor),

@@ -38,7 +38,6 @@ class _DetailScreenState extends State<DetailScreen> {
     await SecStore.getValue(keyVal: SharedPreferencesConstant.DEPTID)
         .then((value) {
       context.read<HomeCubit>().getStationLocation(value).then((value) {
-        print("object321 $value");
         stationLocationByIdResp = value;
       });
     });
