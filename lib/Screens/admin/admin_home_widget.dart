@@ -223,7 +223,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                   fontSize: 13, fontWeight: FontWeight.bold),
                             ),
                             actions: <Widget>[
-                              FlatButton(
+                              ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(ctx).pop();
                                 },
@@ -232,7 +232,7 @@ class _AdminWidgetState extends State<AdminWidget> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ),
-                              FlatButton(
+                              ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(ctx).pop();
                                   Network().check().then((intenet) {

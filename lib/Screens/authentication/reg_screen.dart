@@ -1,5 +1,6 @@
 import 'package:rapid_response/bloc_cubits/reg_cubit/reg_cubit.dart';
 import 'package:rapid_response/bloc_cubits/reg_cubit/reg_state.dart';
+import 'package:rapid_response/models/railway_resp_model.dart';
 import 'package:rapid_response/widgets/input_field_widget.dart';
 import 'package:rapid_response/widgets/dropdown_widget.dart';
 import 'package:rapid_response/routes/app_routes_names.dart';
@@ -35,6 +36,7 @@ class _RegScreenState extends State<RegScreen> {
   ZoneData? zoneResp;
   List<DivisionData>? divisionData;
   List<ZoneData>? zoneData;
+  List<RailwayData>? railwayData;
   String? _railwayType = "",
       _zoneType = "",
       _divisionType = "",
@@ -66,6 +68,7 @@ class _RegScreenState extends State<RegScreen> {
 
   getRailwayData() {
     context.read<RegCubit>().getRailwayType().then((value) {
+      railwayData = value;
       value.forEach((element) {
         railwayTypesResp?.add(element.rname!);
       });
@@ -75,6 +78,7 @@ class _RegScreenState extends State<RegScreen> {
 
   getZoneData(selectedId) {
     context.read<RegCubit>().getZoneType(selectedId).then((value) {
+      zoneData = value;
       value.forEach((element) {
         zoneResp = element;
         zoneTypesResp?.add(element.zname!);
@@ -240,7 +244,11 @@ class _RegScreenState extends State<RegScreen> {
                         onChoose: (newValue, index) {
                           setState(() {
                             _railwayType = newValue;
-                            getZoneData(index + 1);
+                            railwayData!.forEach((element) {
+                              if (element.rname!.contains(newValue)) {
+                                getZoneData(element.rId);
+                              }
+                            });
                             FocusScope.of(context).requestFocus(FocusNode());
                             context.read<RegCubit>().railwayChanged(index + 1);
                           });
@@ -262,7 +270,11 @@ class _RegScreenState extends State<RegScreen> {
                       onChoose: (newValue, index) {
                         setState(() {
                           _zoneType = newValue;
-                          getDivisionData(index + 1);
+                          zoneData!.forEach((element) {
+                            if (element.zname!.contains(newValue)) {
+                              getDivisionData(element.zid);
+                            }
+                          });
                           FocusScope.of(context).requestFocus(FocusNode());
                           context.read<RegCubit>().zoneChanged(index + 1);
                         });
@@ -284,7 +296,11 @@ class _RegScreenState extends State<RegScreen> {
                       onChoose: (newValue, index) {
                         setState(() {
                           _divisionType = newValue;
-                          getDeptData(index + 1);
+                          divisionData!.forEach((element) {
+                            if (element.dname!.contains(newValue)) {
+                              getDeptData(element.dId);
+                            }
+                          });
                           FocusScope.of(context).requestFocus(FocusNode());
                           context.read<RegCubit>().divisionChanged(index + 1);
                         });
@@ -385,59 +401,61 @@ class _RegScreenState extends State<RegScreen> {
                       parametersValidate: "Please Enter Confirm Password",
                     ),
                     const SizedBox(height: DIMENSION_6),
-                    Row(mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                      Checkbox(
-                        value: showValue,
-                        onChanged: (value) async {
-                          setState(() {
-                            showValue = value!;
-                          });
-                        },
-                      ),
-                      InkWell(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: Padding(
-                                padding: const EdgeInsets.only(bottom: 18.0),
-                                child: Text("Terms & Condition"),
-                              ),
-                              content: SingleChildScrollView(
-                                  child: Text(
-                                      "1. The siron sound ringing in Mobile is depend on text message ring. If mobile didnot have network then there may be delay for siron sound.\n\n"
-                                      "2. Always alerted for breakdown duties never depend on mobile phone siron.\n\n"
-                                      "3. If you are in no network zone then inform it to your concern supervisor.\n\n"
-                                      "4. Never switch off your mobile phone, it may lead to no siron sound from mobile.\n\n"
-                                      "5. Always give all necessary permission required to app. If you denied permission then it will malfunction app or no siron sound from mobile.\n\n"
-                                      "6. This app is developed for additional alerting system. Don't completely depend on this app.\n\n"
-                                      "7. In order to use the Rapid Response APP for BD&DM, you must first agree to the terms and Condition. You may not use the Rapid Response App for BD&DM  if you do not accept the terms and conditions\n\n."
-                                      "8. By clicking to accept and/or using this Rapid Response app for BD&DM, you hereby agree to the terms of the terms and conditions.\n\n"
-                                      "9. During Downtime the Rapid Response App for BD&DM may malfunction or may not work.\n\n"
-                                      "10. The Rapid Response App for BD&DM should update to latest version of App.\n\n"
-                                      "11. App developer has rights to change or update terms and conditions.\n\n"
-                                      "12. In order to use the Rapid Response APP for BD&DM, you must first agree to the terms and Condition. You may not use the Rapid Response App for BD&DM  if you do not accept the terms and conditions.\n\n"
-                                      "13. By clicking to accept and/or using this Rapid Response app for BD&DM, you hereby agree to the terms of the terms and Conditions.\n\n"
-                                      "14. The update may be provided either free or paid.")),
-                              actions: <Widget>[
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(ctx).pop();
-                                  },
-                                  child: Text("okay"),
+                          Checkbox(
+                            value: showValue,
+                            onChanged: (value) async {
+                              setState(() {
+                                showValue = value!;
+                              });
+                            },
+                          ),
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 18.0),
+                                    child: Text("Terms & Condition"),
+                                  ),
+                                  content: SingleChildScrollView(
+                                      child: Text(
+                                          "1. The siron sound ringing in Mobile is depend on text message ring. If mobile didnot have network then there may be delay for siron sound.\n\n"
+                                          "2. Always alerted for breakdown duties never depend on mobile phone siron.\n\n"
+                                          "3. If you are in no network zone then inform it to your concern supervisor.\n\n"
+                                          "4. Never switch off your mobile phone, it may lead to no siron sound from mobile.\n\n"
+                                          "5. Always give all necessary permission required to app. If you denied permission then it will malfunction app or no siron sound from mobile.\n\n"
+                                          "6. This app is developed for additional alerting system. Don't completely depend on this app.\n\n"
+                                          "7. In order to use the Rapid Response APP for BD&DM, you must first agree to the terms and Condition. You may not use the Rapid Response App for BD&DM  if you do not accept the terms and conditions\n\n."
+                                          "8. By clicking to accept and/or using this Rapid Response app for BD&DM, you hereby agree to the terms of the terms and conditions.\n\n"
+                                          "9. During Downtime the Rapid Response App for BD&DM may malfunction or may not work.\n\n"
+                                          "10. The Rapid Response App for BD&DM should update to latest version of App.\n\n"
+                                          "11. App developer has rights to change or update terms and conditions.\n\n"
+                                          "12. In order to use the Rapid Response APP for BD&DM, you must first agree to the terms and Condition. You may not use the Rapid Response App for BD&DM  if you do not accept the terms and conditions.\n\n"
+                                          "13. By clicking to accept and/or using this Rapid Response app for BD&DM, you hereby agree to the terms of the terms and Conditions.\n\n"
+                                          "14. The update may be provided either free or paid.")),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Text("okay"),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              );
+                            },
+                            child: TextWidget(
+                              text: "Agree to Terms & Conditions",
+                              small: true,
                             ),
-                          );
-                        },
-                        child: TextWidget(
-                          text: "Agree to Terms & Conditions",
-                          small: true,
-                        ),
-                      )
-                    ]),
+                          )
+                        ]),
                     const SizedBox(height: DIMENSION_6),
                     ButtonWidget(
                       width: double.infinity,

@@ -11,7 +11,7 @@ import 'package:rapid_response/Screens/employee/sms_screen.dart';
 import 'package:rapid_response/controllers/MenuController.dart';
 import 'package:rapid_response/repository/auth_repository.dart';
 import 'package:rapid_response/routes/app_routes_names.dart';
-import 'package:rapid_response/user_profile.dart';
+import 'package:rapid_response/Screens/user_profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:provider/provider.dart';
